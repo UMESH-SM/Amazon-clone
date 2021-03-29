@@ -1,0 +1,112 @@
+.orderdetails {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  min-height: 20vh;
+  border: 0.1px solid rgb(194, 194, 194);
+  border-radius: 1%;
+  margin-top: 2%;
+}
+
+.orderdetails__toprow {
+  flex-basis: 4vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 0.1px solid rgb(194, 194, 194);
+  padding: 1%;
+}
+
+.toprow__title {
+  font-size: 0.7em;
+  font-weight: 500;
+}
+
+.bottomrow__title {
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.orderdetails__orderplaceddate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.orderdetails__total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.orderdetails__shipto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.MuiButton-text {
+  padding: 0 !important;
+}
+
+.orderdetails__orderid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.orderdetails__bottomrow {
+  flex-basis: 16vh;
+  display: flex;
+  align-items: center;
+  padding: 1%;
+}
+
+.orderdetails__image {
+  flex-basis: 20%;
+}
+
+.orderdetails__image > img {
+  max-height: 16vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+.orderdetails__desciption {
+  height: 16vh;
+  flex-basis: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1% 1%;
+}
+
+.orderdetails__deliveryBy {
+  color: green;
+  font-weight: 600;
+}
+
+.orderdetails__deliveredOn {
+  color: black;
+  font-weight: 600;
+}
+
+.orderdetails__title {
+  font-size: 0.9em;
+}
+
+.orderdetails__quantity {
+  font-size: 0.9em;
+}
+
+.orderdetails__price {
+  font-size: 0.9em;
+}
+
+.small__decimal {
+  font-size: smaller;
+}

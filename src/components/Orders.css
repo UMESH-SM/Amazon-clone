@@ -1,0 +1,26 @@
+.orders {
+  width: 100%;
+  min-height: 99.5vh;
+  background-color: white;
+  margin-bottom: 2%;
+}
+
+.orders__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orders__empty {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.orders__empty > span {
+  font-size: large;
+  font-weight: bold;
+}

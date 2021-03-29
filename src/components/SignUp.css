@@ -1,0 +1,114 @@
+.signup {
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.signup__logo {
+  display: flex;
+  justify-content: center;
+}
+
+.signup__logo > img {
+  width: 40%;
+}
+
+.signup__card {
+  height: 65vh;
+  width: 26%;
+  padding: 15px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 0.5px solid black;
+  border-radius: 1%;
+}
+
+.signup__title {
+  font-size: xx-large;
+  font-weight: 500;
+}
+
+.signup__input > label {
+  font-size: small;
+  font-weight: bolder;
+}
+
+.signup__input > input {
+  margin-top: 2%;
+  padding: 5px 10px;
+  width: 89%;
+  font-size: 0.9em;
+  margin-bottom: 4%;
+}
+
+.signup__continue > Button {
+  background-color: #fcbc5d;
+  border: 0.5px solid black;
+  width: 100%;
+}
+
+.signup__continue > Button:hover {
+  background-color: #ff9900;
+}
+
+.signup__note {
+  font-size: 0.8em;
+}
+
+.signup__account {
+  width: 30%;
+}
+
+.signup__account > a {
+  color: blue;
+}
+
+.error__line {
+  color: red;
+  font-size: smaller;
+  font-weight: 500;
+  margin-top: 3%;
+}
+
+.verify__emailContainer {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+
+.verify__emailCard {
+  text-align: center;
+  width: 70%;
+}
+
+.verify__emailCard > img {
+  height: 30vh;
+}
+
+.verify__emailCard > div {
+  font-size: 1.5em;
+  padding: 5% 2%;
+  background-color: white;
+  margin-bottom: 3%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.verify__emailCard > div > div {
+  margin-bottom: 3%;
+}
+
+.verify__emailNote {
+  font-size: 0.8em;
+  margin-bottom: 2%;
+}
+
+.verify__emailButton > Button {
+  background-color: #ff9900;
+  text-transform: unset;
+  width: 15%;
+}

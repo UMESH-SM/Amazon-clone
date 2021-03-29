@@ -1,0 +1,69 @@
+.manageaccount {
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+}
+
+.manageaccount__container {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.manageaccount__title {
+  font-size: xx-large;
+  font-weight: 500;
+  margin-bottom: 2%;
+}
+
+.manageaccount__details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 3%;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+th {
+  width: 150px;
+  font-size: 1.2em;
+}
+
+td {
+  width: 500px;
+}
+
+.manageaccount__buttons {
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.manageaccount__editBtn > Button {
+  text-transform: unset;
+}
+
+.manageaccount__deleteBtn > Button {
+  background-color: rgb(255, 116, 74);
+  text-transform: unset;
+}
+
+.manageaccount__name > input {
+  width: 396px;
+  padding: 4% 10%;
+  font-size: 1.2em;
+}
+
+.manageaccount__email > input {
+  width: 396px;
+  padding: 4% 10%;
+  font-size: 1.2em;
+}

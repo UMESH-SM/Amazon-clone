@@ -1,0 +1,39 @@
+.card {
+  width: 90%;
+  height: 10vh;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 3%;
+}
+
+.name__ending {
+  width: 60%;
+  display: flex;
+  align-items: center;
+}
+
+.name__ending > img {
+  height: 4vh;
+  margin-left: 3%;
+}
+
+.card__name {
+  font-weight: bold;
+}
+
+.ending__with {
+  font-size: small;
+  color: grey;
+  margin-left: 1%;
+}
+
+.deleteCard__button {
+  margin-left: 5%;
+}
+
+.deleteCard__button > Button {
+  background-color: #ff9900;
+  text-transform: unset;
+}

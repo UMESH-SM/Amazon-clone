@@ -1,0 +1,56 @@
+.ordersummary {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 0.1px solid rgb(206, 206, 206);
+  border-radius: 2%;
+  margin-top: 6%;
+}
+
+.ordersummary__placeyourorder {
+  width: 100%;
+}
+
+.ordersummary__placeyourorder > Button {
+  background-color: #ff9900;
+  text-transform: unset;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.ordersummary__details {
+  width: 90%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.ordersummary__line {
+  font-weight: bold;
+}
+
+.ordersummary__items {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ordersummary__delivery {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ordersummary__total {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.small__decimal {
+  font-size: smaller;
+}

@@ -1,0 +1,82 @@
+.addproduct {
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+}
+
+.addproduct__title {
+  font-size: xx-large;
+  font-weight: 500;
+  padding: 2%;
+  text-align: center;
+}
+
+.addproduct__container1 {
+  width: 58%;
+  margin-left: 21%;
+}
+
+.addproduct__container2 {
+  width: 57%;
+  margin-left: 21.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addproduct__container3 {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.addproduct__container4 {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.addproduct__input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1%;
+  margin-bottom: 1%;
+}
+
+.addproduct__input > label {
+  font-size: 1em;
+  font-weight: bolder;
+  margin-bottom: 1%;
+}
+
+.addproduct__input > input {
+  padding: 1.5%;
+  font-size: 1em;
+}
+
+.addproduct__input > select {
+  padding: 1.5%;
+  font-size: 1em;
+}
+
+.addproduct__addButton {
+  padding: 1%;
+  text-align: center;
+}
+
+.addproduct__addButton > Button {
+  background-color: #ff9900;
+  text-transform: unset;
+  margin-top: 2%;
+  margin-bottom: 6%;
+}
+
+.rupee__symbol__large {
+  font-size: 1em;
+  font-weight: 600;
+}

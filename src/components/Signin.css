@@ -1,0 +1,120 @@
+.signin {
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.signin__logo {
+  display: flex;
+  justify-content: center;
+}
+
+.signin__logo > img {
+  width: 40%;
+}
+
+.signin__card {
+  height: 50vh;
+  width: 23%;
+  padding: 15px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 0.5px solid black;
+  border-radius: 1%;
+}
+
+.signin__title {
+  font-size: xx-large;
+  font-weight: 500;
+}
+
+.signin__input > label {
+  font-size: small;
+  font-weight: bolder;
+}
+
+.signin__input > input {
+  margin-top: 2%;
+  padding: 5px 10px;
+  width: 89%;
+  font-size: 0.9em;
+  margin-bottom: 4%;
+}
+
+.signin__continue > Button {
+  background-color: #fcbc5d;
+  border: 0.5px solid black;
+  width: 100%;
+}
+
+.signin__continue > Button:hover {
+  background-color: #ff9900;
+}
+
+.signin__note {
+  font-size: smaller;
+}
+
+.create__account {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.new__toAmazon {
+  width: 90%;
+  font-size: small;
+  color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new__toAmazon > span {
+  flex: 1;
+}
+
+.newtoamazon__text {
+  text-align: center;
+}
+
+.create__button {
+  margin-top: 5%;
+  width: 100%;
+  text-align: center;
+}
+
+.create__accountlink {
+  width: 100%;
+}
+
+.create__accountlink > Button {
+  border: 0.5px solid black;
+  background-color: rgb(233, 233, 233);
+  text-transform: unset;
+  width: 90%;
+  transition: 0.1ms;
+}
+
+.create__accountlink > Button:hover {
+  background-color: rgb(219, 219, 219);
+}
+
+.error__line {
+  color: red;
+  font-size: smaller;
+  font-weight: 500;
+  margin-top: 3%;
+}
+
+.signin__loading {
+  position: absolute;
+  top: 40%;
+  left: 48%;
+}

@@ -1,0 +1,43 @@
+.reviewproduct {
+  width: 100%;
+  min-height: 15vh;
+  height: fit-content;
+  display: flex;
+  margin-bottom: 2%;
+  background-color: rgb(224, 223, 223);
+  border-radius: 1%;
+}
+
+.reviewproduct__image {
+  flex-basis: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reviewproduct__image > img {
+  max-height: 12vh;
+  width: 100%;
+  object-fit: contain;
+}
+
+.reviewproduct__details {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: small;
+}
+
+.reviewproductdetails__title {
+  font-weight: bold;
+}
+
+.reviewproductdetails__price {
+  font-weight: bold;
+  color: maroon;
+}
+
+.reviewproductdetails__quantity {
+  font-weight: bold;
+}

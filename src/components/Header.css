@@ -1,0 +1,225 @@
+.header {
+  display: flex;
+  height: 12vh;
+  min-width: 100%;
+  width: fit-content;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #232f3e;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.header__logo > img {
+  height: 5.5vh;
+}
+
+.select__locationBtn {
+  min-width: 8%;
+  width: fit-content;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.select__locationBtn > Button {
+  width: 100%;
+  text-transform: none;
+}
+
+.select__location {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: white;
+  margin-right: 1%;
+}
+
+.first__line {
+  text-align: left;
+  margin-left: 15%;
+  font-size: 75%;
+  font-weight: 450;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: unset;
+}
+
+.second__line {
+  min-width: 100%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  text-transform: unset;
+}
+
+.bottom__line2 {
+  min-width: 120px;
+  width: fit-content;
+  font-size: 85%;
+  font-weight: bold;
+  text-transform: none;
+  color: white;
+  text-align: left;
+}
+
+.header__changeDefaultAddressButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+  margin-top: 5%;
+}
+
+.header__search {
+  flex: 1.5;
+  display: flex;
+  align-items: center;
+}
+
+.category__button {
+  display: flex;
+  align-items: center;
+  padding: 11.74px 14px;
+  border: 0.1px solid rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 10%;
+  border-bottom-left-radius: 10%;
+  color: rgba(0, 0, 0, 0.8);
+  outline: none;
+  cursor: pointer;
+}
+
+.header__categoryButtons > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+  margin-bottom: 5%;
+}
+
+.header__categoryLastButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+}
+
+.down__arrow {
+  margin-left: 20%;
+  font-size: 75%;
+}
+
+.small__arrow {
+  font-size: 62%;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.align__arrow {
+  margin-left: 5px;
+}
+
+.search__button {
+  display: flex;
+  align-items: center;
+  padding: 7.93px 12px;
+  background-color: #ff9900;
+  border: none;
+  border-top-right-radius: 10%;
+  border-bottom-right-radius: 10%;
+  outline: none;
+  cursor: pointer;
+}
+
+.header__nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+}
+
+a:-webkit-any-link {
+  color: white;
+  text-decoration: none;
+}
+
+.country__option {
+  display: flex;
+  align-items: center;
+}
+
+.india__flag {
+  height: 3vh;
+}
+
+.top__line {
+  font-size: 75%;
+  font-weight: 450;
+  color: white;
+  margin-bottom: 2%;
+  text-transform: none;
+  text-align: left;
+}
+
+.bottom__line {
+  display: flex;
+  align-items: center;
+  font-size: 85%;
+  font-weight: bold;
+  text-transform: none;
+  color: white;
+}
+
+.cart__option {
+  display: flex;
+  align-items: center;
+  margin-right: 5%;
+}
+
+.cart__count {
+  position: absolute;
+  margin-left: 22px;
+  margin-top: -9px;
+  font-weight: bolder;
+  color: black;
+  background-color: #ff9900;
+  padding: 1px 6px;
+  border-radius: 50%;
+}
+
+.header__signinButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+}
+
+.header__signoutButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+}
+
+.header__manageAccountButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+  margin-bottom: 5%;
+}
+
+.header__manageAddressButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+  margin-bottom: 5%;
+}
+
+.header__manageCardsButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+  margin-bottom: 5%;
+}

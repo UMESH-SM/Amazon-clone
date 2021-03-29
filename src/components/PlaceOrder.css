@@ -1,0 +1,147 @@
+.placeorder {
+  min-height: 100vh;
+  background-color: white;
+}
+
+.placeorder__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0% 3%;
+}
+
+.placeorder__title {
+  font-size: xx-large;
+  font-weight: 500;
+}
+
+.placeorder__note {
+  font-size: small;
+}
+
+.placeorder__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.placeorder__leftContainer {
+  flex-basis: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.placeorder__rightContainer {
+  flex-basis: 25%;
+}
+
+.placeorder__addressDetails {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+  padding: 3%;
+  border: 0.1px solid rgb(206, 206, 206);
+  border-radius: 2%;
+}
+
+.placeorder__shippingDetails {
+  flex-basis: 60%;
+}
+
+.placeorder__paymentDetails {
+  flex-basis: 40%;
+  margin-left: 30%;
+}
+
+.placeordershippingDetails__title {
+  font-size: medium;
+  font-weight: bold;
+}
+
+.placeorderpaymentDetails__title {
+  font-size: medium;
+  font-weight: bold;
+}
+
+.placeorder__orderDetails {
+  width: 92%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 2%;
+  padding: 2%;
+  border: 0.1px solid rgb(206, 206, 206);
+  border-radius: 1%;
+}
+
+.placeorder__deliveryDate {
+  font-size: large;
+  font-weight: bold;
+  color: green;
+}
+
+.placeorder__deliveryNote {
+  font-size: small;
+}
+
+.placeorder__itemDetailsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2%;
+}
+
+.placeorder__itemDetails {
+  flex-basis: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.placeorder__deliveryDay {
+  flex-basis: 30%;
+  font-size: small;
+  font-weight: 600;
+  margin-left: 2%;
+}
+
+.deliveryday__title {
+  font-size: medium;
+  font-weight: bold;
+  margin-bottom: 5%;
+}
+
+.fontgreencolor {
+  color: green;
+}
+
+.small__decimal {
+  font-size: smaller;
+}
+
+.placeorder__footer {
+  font-size: 0.7em;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.fontcolorblue {
+  color: rgb(1, 100, 139);
+}
+
+.placeorder__hr {
+  width: 99%;
+  margin-top: 1%;
+}
+
+.placeorder__copyright {
+  font-size: 0.7em;
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

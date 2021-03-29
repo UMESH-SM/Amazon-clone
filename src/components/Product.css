@@ -1,0 +1,79 @@
+.product {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  border-radius: 1%;
+  background-color: white;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  margin: 1%;
+  padding: 10px 10px;
+  z-index: 1;
+}
+
+.product__image {
+  flex-basis: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product__image > img {
+  max-height: 200px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.product__info {
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.rating {
+  display: flex;
+  color: #ff9900;
+}
+
+.reviews__arrow {
+  color: #007185;
+  margin-top: 1%;
+}
+
+.reviews__count {
+  color: #007185;
+  font-size: small;
+  margin-top: 1.5%;
+}
+
+.price {
+  margin-left: 1%;
+  font-size: larger;
+  font-weight: bold;
+  color: maroon;
+}
+
+.rupee__symbol {
+  font-size: smaller;
+}
+
+.add__toCart {
+  margin: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add__toCart > Button {
+  background-color: #ff9900;
+  text-transform: unset;
+}
+
+.product__editButton {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}

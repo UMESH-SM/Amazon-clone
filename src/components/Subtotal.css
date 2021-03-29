@@ -1,0 +1,20 @@
+.subtotal {
+  height: 34.5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  margin: 2%;
+  padding: 10px 10px;
+}
+
+.small__decimal {
+  font-size: smaller;
+}
+
+.subtotal__proceedButton > Button {
+  background-color: #ff9900;
+  text-transform: unset;
+  width: 80%;
+  margin-left: 10%;
+}

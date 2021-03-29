@@ -1,0 +1,35 @@
+.newaddress {
+  width: 45%;
+}
+
+.newaddress__input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1%;
+  margin-bottom: 1%;
+}
+
+.newaddress__input > label {
+  font-size: 0.85em;
+  font-weight: bolder;
+  margin-bottom: 1%;
+}
+
+.newaddress__input > input {
+  padding: 1%;
+}
+
+.newaddress__input > select {
+  padding: 1.2%;
+}
+
+.newaddress__addButton {
+  padding: 1%;
+}
+
+.newaddress__addButton > Button {
+  background-color: #ff9900;
+  text-transform: unset;
+  margin-right: 5%;
+}

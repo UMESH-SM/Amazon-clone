@@ -1,0 +1,53 @@
+.address {
+  min-height: 45vh;
+  height: fit-content;
+  width: 20%;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgb(204, 203, 203);
+  border-radius: 5%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+
+.address__name {
+  font-size: large;
+  font-weight: bold;
+}
+
+.address__deliverButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: unset;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.address__defaultButton > Button {
+  width: 100%;
+  text-transform: none;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.default__deliveryButton > Button {
+  width: 100%;
+  background-color: #ff9900;
+  text-transform: none;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.address__editDeleteButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.address__editDeleteButtons > Button {
+  font-size: 0.7em;
+  font-weight: 600;
+  text-transform: none;
+}
