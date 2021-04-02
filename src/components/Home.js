@@ -7,6 +7,8 @@ import Carousel from "./Carousel";
 import Product from "./Product";
 import { db } from "../firebase_config";
 import SnackBar from "./SnackBar";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 
 function Home() {
   const [products, setProducts] = useContext(ProductContext);
@@ -99,6 +101,21 @@ function Home() {
     });
   };
 
+  const sideScroll = (element, direction, speed, distance, step) => {
+    var scrollAmount = 0;
+    var slideTimer = setInterval(function () {
+      if (direction == "left") {
+        element.scrollLeft -= step;
+      } else {
+        element.scrollLeft += step;
+      }
+      scrollAmount += step;
+      if (scrollAmount >= distance) {
+        window.clearInterval(slideTimer);
+      }
+    }, speed);
+  };
+
   return search.searchResults.length ? (
     search.searchResults[0].id === "empty" ? (
       <>
@@ -141,7 +158,10 @@ function Home() {
         <div className="home__productsCategory">Electronics</div>
         <div className="home__productsLayer">
           <div className="home__productsSubcategory">Mobiles</div>
-          <div className="home__productsContainer">
+          <div
+            id="home__productsContainer1"
+            className="home__productsContainer"
+          >
             {mobilesList.map((item) => (
               <Product
                 key={item.id}
@@ -151,10 +171,35 @@ function Home() {
               />
             ))}
           </div>
+          <span
+            className="homeproductsContainer__LeftScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer1"
+              );
+              sideScroll(container, "left", 25, 1500, 60);
+            }}
+          >
+            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+          <span
+            className="homeproductsContainer__RightScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer1"
+              );
+              sideScroll(container, "right", 25, 1500, 60);
+            }}
+          >
+            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
         </div>
         <div className="home__productsLayer">
           <div className="home__productsSubcategory">Laptops</div>
-          <div className="home__productsContainer">
+          <div
+            id="home__productsContainer2"
+            className="home__productsContainer"
+          >
             {laptopsList.map((item) => (
               <Product
                 key={item.id}
@@ -164,6 +209,28 @@ function Home() {
               />
             ))}
           </div>
+          <span
+            className="homeproductsContainer__LeftScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer2"
+              );
+              sideScroll(container, "left", 25, 1500, 60);
+            }}
+          >
+            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+          <span
+            className="homeproductsContainer__RightScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer2"
+              );
+              sideScroll(container, "right", 25, 1500, 60);
+            }}
+          >
+            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
         </div>
         {/* <div className="home__productsLayer">
           <div className="home__productsSubcategory">Televisions</div>

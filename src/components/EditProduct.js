@@ -235,6 +235,7 @@ export default function EditProduct({ item, handleEditProduct }) {
                     <option value="mi">Mi</option>
                     <option value="oneplus">Oneplus</option>
                     <option value="oppo">Oppo</option>
+                    <option value="redmi">Redmi</option>
                     <option value="samsung">Samsung</option>
                     <option value="vivo">Vivo</option>
                   </select>

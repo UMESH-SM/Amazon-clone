@@ -70,13 +70,13 @@ function CartProduct({ item }) {
   };
 
   return (
-    <div className="cart__product">
-      <div className="product__image">
+    <div className="cartproduct">
+      <div className="cartproduct__image">
         <img src={image} alt="" />
       </div>
-      <div className="product__info">
-        <div className="title">{title}</div>
-        <div className="rating">
+      <div className="cartproduct__info">
+        <div className="cartproduct__title">{title}</div>
+        <div className="cartproduct__rating">
           {Array(rating)
             .fill()
             .map((_, i) => (
@@ -88,7 +88,7 @@ function CartProduct({ item }) {
               <StarBorderIcon key={i} />
             ))}
           &nbsp;<span className="reviews__arrow">▾ </span>
-          <span className="reviews__count">
+          <span className="cartproduct__reviewscount">
             {getIndianRupeeFormat(reviews)}
           </span>
         </div>
@@ -116,10 +116,10 @@ function CartProduct({ item }) {
             </Button>
           </ButtonGroup>
         </div>
-        <div className="price">
+        <div className="cartproduct__price">
           <span className="rupee__symbol">₹</span> {getIndianRupeeFormat(price)}
         </div>
-        <div className="remove__fromCart">
+        <div className="cartproduct__removefromCart">
           <Button
             variant="contained"
             size="small"

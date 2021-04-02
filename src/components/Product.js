@@ -7,6 +7,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Button } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import EditProduct from "./EditProduct";
+import ProductDescription from "./ProductDescription";
 
 function Product({ item, handleEditProduct, handleSnackbarAlert }) {
   const {
@@ -24,6 +25,11 @@ function Product({ item, handleEditProduct, handleSnackbarAlert }) {
   const [user, setUser] = useContext(UserContext);
   const [cart, setCart] = useContext(CartContext);
   const [proceed, setProceed] = useState(false);
+  const [productDescription, setProductDescription] = useState({
+    show: false,
+    item: item,
+  });
+  let popup = true;
 
   const getIndianRupeeFormat = (temp) => {
     var x = temp;
@@ -104,18 +110,29 @@ function Product({ item, handleEditProduct, handleSnackbarAlert }) {
           });
         }
       }
+      popup = false;
     } else {
       setProceed(true);
     }
   };
 
+  const handleProductDescription = () => {
+    if (popup) {
+      setProductDescription({
+        ...productDescription,
+        show: true,
+      });
+    }
+    popup = true;
+  };
+
   return proceed ? (
     <Redirect to="/signin" />
   ) : (
-    <div className="product">
+    <div className="product" onClick={handleProductDescription}>
       <div className="product__info">
-        <div className="title">{title}</div>
-        <div className="rating">
+        <div className="productinfo__title">{title}</div>
+        <div className="productinfo__rating">
           {Array(rating)
             .fill()
             .map((_, i) => (
@@ -127,24 +144,31 @@ function Product({ item, handleEditProduct, handleSnackbarAlert }) {
               <StarBorderIcon key={i} />
             ))}
           &nbsp;<span className="reviews__arrow">▾ </span>
-          <span className="reviews__count">
+          <span className="productinfo__reviewscount">
             {getIndianRupeeFormat(reviews)}
           </span>
         </div>
-        <div className="price">
+        <div className="productinfo__price">
           <span className="rupee__symbol">₹</span> {getIndianRupeeFormat(price)}
         </div>
       </div>
       <div className="product__image">
         <img src={image} alt="" />
       </div>
-      <div className="add__toCart">
+      <div className="productinfo__addtoCart">
         <Button variant="contained" size="small" onClick={handleAddToCart}>
           Add to Cart
         </Button>
       </div>
       {user.uid === process.env.REACT_APP_ADMIN_ID ? (
         <EditProduct item={item} handleEditProduct={handleEditProduct} />
+      ) : null}
+      {productDescription.show ? (
+        <ProductDescription
+          item={item}
+          productDescription={productDescription}
+          setProductDescription={setProductDescription}
+        />
       ) : null}
     </div>
   );

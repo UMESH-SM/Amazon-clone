@@ -68,6 +68,8 @@ const handleConfirmBoxConfirm = () => {
   ) : null;
 }
 
+
+images: ["", "", "", "", "", "", "", "", ""],
 // db.collection("products")
 //   .doc("productsDoc")
 //   .set({
