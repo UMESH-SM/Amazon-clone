@@ -1,3 +1,9 @@
+.productdescription__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .productdescription {
   display: flex;
   width: 100%;
@@ -40,7 +46,8 @@
   min-height: 10vh;
   width: 100%;
   object-fit: contain;
-  border: 1px solid black;
+  border: 1px solid grey;
+  border-radius: 10%;
   margin-bottom: 1%;
   cursor: pointer;
   transition: 450ms ease;

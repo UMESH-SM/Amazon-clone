@@ -29,7 +29,6 @@ function Product({ item, handleEditProduct, handleSnackbarAlert }) {
     show: false,
     item: item,
   });
-  let popup = true;
 
   const getIndianRupeeFormat = (temp) => {
     var x = temp;
@@ -110,26 +109,22 @@ function Product({ item, handleEditProduct, handleSnackbarAlert }) {
           });
         }
       }
-      popup = false;
     } else {
       setProceed(true);
     }
   };
 
   const handleProductDescription = () => {
-    if (popup) {
-      setProductDescription({
-        ...productDescription,
-        show: true,
-      });
-    }
-    popup = true;
+    setProductDescription({
+      ...productDescription,
+      show: true,
+    });
   };
 
   return proceed ? (
     <Redirect to="/signin" />
   ) : (
-    <div className="product" onClick={handleProductDescription}>
+    <div className="product">
       <div className="product__info">
         <div className="productinfo__title">{title}</div>
         <div className="productinfo__rating">
@@ -152,7 +147,7 @@ function Product({ item, handleEditProduct, handleSnackbarAlert }) {
           <span className="rupee__symbol">₹</span> {getIndianRupeeFormat(price)}
         </div>
       </div>
-      <div className="product__image">
+      <div className="product__image" onClick={handleProductDescription}>
         <img src={image} alt="" />
       </div>
       <div className="productinfo__addtoCart">

@@ -9,7 +9,6 @@
 .addproduct__title {
   font-size: xx-large;
   font-weight: 500;
-  padding: 2%;
   text-align: center;
 }
 
@@ -45,7 +44,6 @@
   flex-direction: column;
   justify-content: space-around;
   padding: 1%;
-  margin-bottom: 1%;
 }
 
 .addproduct__input > label {
@@ -55,17 +53,16 @@
 }
 
 .addproduct__input > input {
-  padding: 1.5%;
+  padding: 1vh;
   font-size: 1em;
 }
 
 .addproduct__input > select {
-  padding: 1.5%;
+  padding: 1vh;
   font-size: 1em;
 }
 
 .addproduct__addButton {
-  padding: 1%;
   text-align: center;
 }
 
@@ -73,7 +70,7 @@
   background-color: #ff9900;
   text-transform: unset;
   margin-top: 2%;
-  margin-bottom: 6%;
+  margin-bottom: 2%;
 }
 
 .rupee__symbol__large {

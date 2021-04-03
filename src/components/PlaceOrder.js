@@ -116,7 +116,9 @@ function PlaceOrder() {
                 <div>
                   <div>{cart.payment.title}</div>
                   <div>
-                    {cart.payment.type === "card" ? "xxxx xxxx xxxx " : null}
+                    {cart.payment.type.toLowerCase() === "card"
+                      ? "xxxx xxxx xxxx "
+                      : null}
                     {cart.payment.value}
                   </div>
                 </div>

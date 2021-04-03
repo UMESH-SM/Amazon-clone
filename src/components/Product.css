@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   min-width: 21.5%;
+  max-width: 25%;
   border-radius: 1%;
   background-color: white;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
@@ -9,7 +10,6 @@
   padding: 10px 10px;
   z-index: 1;
   transition: transform 450ms;
-  cursor: pointer;
 }
 
 .product:hover {
@@ -59,6 +59,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 .product__image > img {
@@ -80,8 +81,21 @@
   text-transform: unset;
 }
 
+.productEdit__container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .product__editButton {
+  width: 10%;
   display: flex;
   justify-content: flex-end;
   cursor: pointer;
+  color: grey;
+  transition: transform 450ms;
+}
+
+.product__editButton:hover {
+  color: black;
+  transform: scale(1.08);
 }

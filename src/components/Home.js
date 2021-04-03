@@ -20,22 +20,33 @@ function Home() {
   });
 
   let mobilesList = [];
+  let laptopsList = [];
+  let tabletsList = [];
+  let televisionsList = [];
+  let shirtsList = [];
+  let tshirtsList = [];
+  let trousersList = [];
   products.productsList.forEach((categoryItem) => {
     if (categoryItem.category === "electronics") {
       categoryItem.categoryItems.forEach((subcategoryItem) => {
         if (subcategoryItem.subcategory === "mobiles") {
           mobilesList = subcategoryItem.subcategoryItems;
+        } else if (subcategoryItem.subcategory === "laptops") {
+          laptopsList = subcategoryItem.subcategoryItems;
+        } else if (subcategoryItem.subcategory === "tablets") {
+          tabletsList = subcategoryItem.subcategoryItems;
+        } else if (subcategoryItem.subcategory === "televisions") {
+          televisionsList = subcategoryItem.subcategoryItems;
         }
       });
-    }
-  });
-
-  let laptopsList = [];
-  products.productsList.forEach((categoryItem) => {
-    if (categoryItem.category === "electronics") {
+    } else if (categoryItem.category === "clothing") {
       categoryItem.categoryItems.forEach((subcategoryItem) => {
-        if (subcategoryItem.subcategory === "laptops") {
-          laptopsList = subcategoryItem.subcategoryItems;
+        if (subcategoryItem.subcategory === "shirts") {
+          shirtsList = subcategoryItem.subcategoryItems;
+        } else if (subcategoryItem.subcategory === "t-shirts") {
+          tshirtsList = subcategoryItem.subcategoryItems;
+        } else if (subcategoryItem.subcategory === "trousers") {
+          trousersList = subcategoryItem.subcategoryItems;
         }
       });
     }
@@ -64,7 +75,8 @@ function Home() {
               if (productItem.id === id) {
                 productItem.title = displayName;
                 productItem.searchName = searchName;
-                productItem.image = imageUrl;
+                productItem.image = imageUrl.split(",")[0];
+                productItem.images = imageUrl.split(",");
                 productItem.price = parseInt(price);
                 productItem.rating = parseInt(rating);
                 productItem.reviews = parseInt(reviews);
@@ -83,6 +95,11 @@ function Home() {
       .set(productsCopy)
       .then(() => {
         console.log("Product updated.");
+        setSnackbaralert({
+          show: true,
+          type: "success",
+          msg: "Product updated.",
+        });
       })
       .catch((error) => {
         console.error("Error editing product: ", error);
@@ -131,7 +148,7 @@ function Home() {
       <>
         <Header />
         <div className="home">
-          <div className="home__productsContainer">
+          <div className="home__searchProductsContainer">
             {search.searchResults.map((item) => (
               <Product
                 key={item.id}
@@ -225,6 +242,197 @@ function Home() {
             onClick={() => {
               const container = document.getElementById(
                 "home__productsContainer2"
+              );
+              sideScroll(container, "right", 25, 1500, 60);
+            }}
+          >
+            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+        </div>
+        <div className="home__productsLayer">
+          <div className="home__productsSubcategory">Tablets</div>
+          <div
+            id="home__productsContainer3"
+            className="home__productsContainer"
+          >
+            {tabletsList.map((item) => (
+              <Product
+                key={item.id}
+                item={item}
+                handleEditProduct={handleEditProduct}
+                handleSnackbarAlert={handleSnackbarAlert}
+              />
+            ))}
+          </div>
+          <span
+            className="homeproductsContainer__LeftScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer3"
+              );
+              sideScroll(container, "left", 25, 1500, 60);
+            }}
+          >
+            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+          <span
+            className="homeproductsContainer__RightScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer3"
+              );
+              sideScroll(container, "right", 25, 1500, 60);
+            }}
+          >
+            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+        </div>
+        <div className="home__productsLayer">
+          <div className="home__productsSubcategory">Televisions</div>
+          <div
+            id="home__productsContainer4"
+            className="home__productsContainer"
+          >
+            {televisionsList.map((item) => (
+              <Product
+                key={item.id}
+                item={item}
+                handleEditProduct={handleEditProduct}
+                handleSnackbarAlert={handleSnackbarAlert}
+              />
+            ))}
+          </div>
+          <span
+            className="homeproductsContainer__LeftScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer4"
+              );
+              sideScroll(container, "left", 25, 1500, 60);
+            }}
+          >
+            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+          <span
+            className="homeproductsContainer__RightScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer4"
+              );
+              sideScroll(container, "right", 25, 1500, 60);
+            }}
+          >
+            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+        </div>
+        <div className="home__productsCategory">Clothing</div>
+        <div className="home__productsLayer">
+          <div className="home__productsSubcategory">Shirts</div>
+          <div
+            id="home__productsContainer5"
+            className="home__productsContainer"
+          >
+            {shirtsList.map((item) => (
+              <Product
+                key={item.id}
+                item={item}
+                handleEditProduct={handleEditProduct}
+                handleSnackbarAlert={handleSnackbarAlert}
+              />
+            ))}
+          </div>
+          <span
+            className="homeproductsContainer__LeftScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer5"
+              );
+              sideScroll(container, "left", 25, 1500, 60);
+            }}
+          >
+            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+          <span
+            className="homeproductsContainer__RightScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer5"
+              );
+              sideScroll(container, "right", 25, 1500, 60);
+            }}
+          >
+            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+        </div>
+        <div className="home__productsLayer">
+          <div className="home__productsSubcategory">T-Shirts</div>
+          <div
+            id="home__productsContainer6"
+            className="home__productsContainer"
+          >
+            {tshirtsList.map((item) => (
+              <Product
+                key={item.id}
+                item={item}
+                handleEditProduct={handleEditProduct}
+                handleSnackbarAlert={handleSnackbarAlert}
+              />
+            ))}
+          </div>
+          <span
+            className="homeproductsContainer__LeftScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer6"
+              );
+              sideScroll(container, "left", 25, 1500, 60);
+            }}
+          >
+            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+          <span
+            className="homeproductsContainer__RightScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer6"
+              );
+              sideScroll(container, "right", 25, 1500, 60);
+            }}
+          >
+            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+        </div>
+        <div className="home__productsLayer">
+          <div className="home__productsSubcategory">Trousers</div>
+          <div
+            id="home__productsContainer7"
+            className="home__productsContainer"
+          >
+            {trousersList.map((item) => (
+              <Product
+                key={item.id}
+                item={item}
+                handleEditProduct={handleEditProduct}
+                handleSnackbarAlert={handleSnackbarAlert}
+              />
+            ))}
+          </div>
+          <span
+            className="homeproductsContainer__LeftScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer7"
+              );
+              sideScroll(container, "left", 25, 1500, 60);
+            }}
+          >
+            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+          <span
+            className="homeproductsContainer__RightScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer7"
               );
               sideScroll(container, "right", 25, 1500, 60);
             }}

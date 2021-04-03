@@ -26,11 +26,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function EditProduct({ item, handleEditProduct }) {
+  let imagesUrls = "";
+  item.images.forEach((image, i) => {
+    if (i === 0) {
+      imagesUrls = imagesUrls + image;
+    } else {
+      imagesUrls = imagesUrls + "," + image;
+    }
+  });
+
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [displayName, setDisplayName] = useState(item.title);
   const [searchName, setSearchName] = useState(item.searchName);
-  const [imageUrl, setImageUrl] = useState(item.image);
+  const [imageUrl, setImageUrl] = useState(imagesUrls);
   const [price, setPrice] = useState(String(item.price));
   const [rating, setRating] = useState(String(item.rating));
   const [reviews, setReviews] = useState(String(item.reviews));
@@ -49,7 +58,7 @@ export default function EditProduct({ item, handleEditProduct }) {
   const handleCancelEdit = () => {
     setDisplayName(item.title);
     setSearchName(item.searchName);
-    setImageUrl(item.image);
+    setImageUrl(imagesUrls);
     setPrice(String(item.price));
     setRating(String(item.rating));
     setReviews(String(item.reviews));
@@ -83,7 +92,7 @@ export default function EditProduct({ item, handleEditProduct }) {
   };
 
   return (
-    <div>
+    <div className="productEdit__container">
       <div className="product__editButton" onClick={handleClickOpen}>
         <EditIcon />
       </div>
@@ -140,7 +149,9 @@ export default function EditProduct({ item, handleEditProduct }) {
                 />
               </div>
               <div className="addproduct__input">
-                <label>Image URL</label>
+                <label>
+                  Images URLs (Enter all Images URLs seperated with commas)
+                </label>
                 <input
                   type="text"
                   value={imageUrl}
@@ -219,26 +230,57 @@ export default function EditProduct({ item, handleEditProduct }) {
                       defaultValue={subcategory}
                       onChange={(e) => setSubcategory(e.target.value)}
                     >
+                      <option value="jeans">Jeans</option>
+                      <option value="t-shirts">T-Shirts</option>
                       <option value="shirts">Shirts</option>
+                      <option value="trousers">Trousers</option>
                       <option value="pants">Pants</option>
                     </select>
                   ) : null}
                 </div>
                 <div className="addproduct__input">
                   <label>Brand</label>
-                  <select
-                    defaultValue={brand}
-                    onChange={(e) => setBrand(e.target.value)}
-                  >
-                    <option value="apple">Apple</option>
-                    <option value="asus">Asus</option>
-                    <option value="mi">Mi</option>
-                    <option value="oneplus">Oneplus</option>
-                    <option value="oppo">Oppo</option>
-                    <option value="redmi">Redmi</option>
-                    <option value="samsung">Samsung</option>
-                    <option value="vivo">Vivo</option>
-                  </select>
+                  {category === "electronics" ? (
+                    <select
+                      defaultValue={brand}
+                      onChange={(e) => setBrand(e.target.value)}
+                    >
+                      <option value="acer">Acer</option>
+                      <option value="apple">Apple</option>
+                      <option value="avita">Avita</option>
+                      <option value="asus">Asus</option>
+                      <option value="dell">Dell</option>
+                      <option value="google">Google</option>
+                      <option value="honor">Honor</option>
+                      <option value="hp">HP</option>
+                      <option value="huawei">Huawei</option>
+                      <option value="lenovo">Lenovo</option>
+                      <option value="lg">LG</option>
+                      <option value="mi">MI</option>
+                      <option value="microsoft">Microsoft</option>
+                      <option value="oneplus">Oneplus</option>
+                      <option value="oppo">Oppo</option>
+                      <option value="panasonic">Panasonic</option>
+                      <option value="realme">Realme</option>
+                      <option value="redmi">Redmi</option>
+                      <option value="tcl">TCL</option>
+                      <option value="samsung">Samsung</option>
+                      <option value="sony">Sony</option>
+                      <option value="vivo">Vivo</option>
+                      <option value="vu">VU</option>
+                      <option value="others">Others</option>
+                    </select>
+                  ) : null}
+                  {category === "clothing" ? (
+                    <select
+                      defaultValue={brand}
+                      onChange={(e) => setBrand(e.target.value)}
+                    >
+                      <option value="us-polo">US Polo</option>
+                      <option value="puma">Puma</option>
+                      <option value="tommy-hilfiger">Tommy Hilfiger</option>
+                    </select>
+                  ) : null}
                 </div>
               </div>
             </div>

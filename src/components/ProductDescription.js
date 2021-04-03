@@ -5,6 +5,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
+import CloseIcon from "@material-ui/icons/Close";
 
 function PaperComponent(props) {
   return (
@@ -48,7 +49,12 @@ export default function ProductDescription({
         style={{ width: "100%" }}
       >
         <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-          {searchName}
+          <div className="productdescription__title">
+            <span>{searchName}</span>
+            <span style={{ cursor: "pointer" }} onClick={handleClose}>
+              <CloseIcon />
+            </span>
+          </div>
         </DialogTitle>
         <DialogContent>
           <div className="productdescription">
