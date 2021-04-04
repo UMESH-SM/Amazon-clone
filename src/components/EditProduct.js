@@ -209,6 +209,7 @@ export default function EditProduct({ item, handleEditProduct }) {
                   >
                     <option value="electronics">Electronics</option>
                     <option value="clothing">Clothing</option>
+                    <option value="others">Others</option>
                   </select>
                 </div>
                 <div className="addproduct__input">
@@ -223,6 +224,7 @@ export default function EditProduct({ item, handleEditProduct }) {
                       <option value="tablets">Tablets</option>
                       <option value="televisions">Televisions</option>
                       <option value="smartwatches">Smartwatches</option>
+                      <option value="others">Others</option>
                     </select>
                   ) : null}
                   {category === "clothing" ? (
@@ -235,6 +237,15 @@ export default function EditProduct({ item, handleEditProduct }) {
                       <option value="shirts">Shirts</option>
                       <option value="trousers">Trousers</option>
                       <option value="pants">Pants</option>
+                      <option value="others">Others</option>
+                    </select>
+                  ) : null}
+                  {category === "others" ? (
+                    <select
+                      defaultValue="others"
+                      onChange={(e) => setSubcategory(e.target.value)}
+                    >
+                      <option value="others">Others</option>
                     </select>
                   ) : null}
                 </div>
@@ -276,9 +287,33 @@ export default function EditProduct({ item, handleEditProduct }) {
                       defaultValue={brand}
                       onChange={(e) => setBrand(e.target.value)}
                     >
-                      <option value="us-polo">US Polo</option>
+                      <option value="adidas">Adidas</option>
+                      <option value="allen-solly">Allen Solly</option>
+                      <option value="deisel">Deisel</option>
+                      <option value="flying-machine">Flying Machine</option>
+                      <option value="levis">Levi's</option>
+                      <option value="lee-cooper">Lee Cooper</option>
+                      <option value="mufti">Mufti</option>
+                      <option value="nike">Nike</option>
+                      <option value="park-avenue">Park Avenue</option>
+                      <option value="pepe-jeans">Pepe Jeans</option>
+                      <option value="peter-england">Peter England</option>
+                      <option value="provogue">Provogue</option>
                       <option value="puma">Puma</option>
+                      <option value="raymond">Raymond</option>
                       <option value="tommy-hilfiger">Tommy Hilfiger</option>
+                      <option value="us-polo">US Polo</option>
+                      <option value="van-heusen">Van-Heusen</option>
+                      <option value="wrangler">Wrangler</option>
+                      <option value="others">Others</option>
+                    </select>
+                  ) : null}
+                  {category === "others" ? (
+                    <select
+                      defaultValue="others"
+                      onChange={(e) => setBrand(e.target.value)}
+                    >
+                      <option value="others">Others</option>
                     </select>
                   ) : null}
                 </div>

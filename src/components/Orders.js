@@ -1,11 +1,17 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./Orders.css";
 import { OrdersContext } from "../contexts/OrdersContext";
 import Header from "./Header";
 import OrderDetails from "./OrderDetails";
+import SnackBar from "./SnackBar";
 
 function Orders() {
   const [orders, setOrders] = useContext(OrdersContext);
+  const [snackbaralert, setSnackbaralert] = useState({
+    show: false,
+    msg: "",
+    type: "",
+  });
 
   return (
     <div className="orders">
@@ -13,7 +19,11 @@ function Orders() {
       {orders.ordersList && orders.ordersList.length ? (
         <div className="orders__container">
           {orders.ordersList.map((order) => (
-            <OrderDetails key={order.id} order={order} />
+            <OrderDetails
+              key={order.id}
+              order={order}
+              setSnackbaralert={setSnackbaralert}
+            />
           ))}
         </div>
       ) : (
@@ -22,6 +32,12 @@ function Orders() {
           <span>No Orders found.</span>
         </div>
       )}
+      {snackbaralert.show ? (
+        <SnackBar
+          snackbaralert={snackbaralert}
+          setSnackbaralert={setSnackbaralert}
+        />
+      ) : null}
     </div>
   );
 }

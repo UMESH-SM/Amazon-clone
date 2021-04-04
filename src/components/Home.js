@@ -26,6 +26,7 @@ function Home() {
   let shirtsList = [];
   let tshirtsList = [];
   let trousersList = [];
+  let jeansList = [];
   products.productsList.forEach((categoryItem) => {
     if (categoryItem.category === "electronics") {
       categoryItem.categoryItems.forEach((subcategoryItem) => {
@@ -47,6 +48,8 @@ function Home() {
           tshirtsList = subcategoryItem.subcategoryItems;
         } else if (subcategoryItem.subcategory === "trousers") {
           trousersList = subcategoryItem.subcategoryItems;
+        } else if (subcategoryItem.subcategory === "jeans") {
+          jeansList = subcategoryItem.subcategoryItems;
         }
       });
     }
@@ -433,6 +436,44 @@ function Home() {
             onClick={() => {
               const container = document.getElementById(
                 "home__productsContainer7"
+              );
+              sideScroll(container, "right", 25, 1500, 60);
+            }}
+          >
+            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+        </div>
+        <div className="home__productsLayer">
+          <div className="home__productsSubcategory">Jeans</div>
+          <div
+            id="home__productsContainer8"
+            className="home__productsContainer"
+          >
+            {jeansList.map((item) => (
+              <Product
+                key={item.id}
+                item={item}
+                handleEditProduct={handleEditProduct}
+                handleSnackbarAlert={handleSnackbarAlert}
+              />
+            ))}
+          </div>
+          <span
+            className="homeproductsContainer__LeftScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer8"
+              );
+              sideScroll(container, "left", 25, 1500, 60);
+            }}
+          >
+            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+          </span>
+          <span
+            className="homeproductsContainer__RightScroll"
+            onClick={() => {
+              const container = document.getElementById(
+                "home__productsContainer8"
               );
               sideScroll(container, "right", 25, 1500, 60);
             }}

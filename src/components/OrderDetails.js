@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import "./OrderDetails.css";
+import { OrdersContext } from "../contexts/OrdersContext";
 import SimplePopover from "./SimplePopover";
 import SimplePopover2 from "./SimplePopover2";
+import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import ConfirmBox from "./ConfirmBox";
 
-function OrderDetails({ order }) {
+function OrderDetails({ order, setSnackbaralert }) {
   const item = order.item;
   const address = order.address;
   const orderid = order.id;
   const payment = order.payment;
   const delivery = order.delivery;
   const orderedon = order.orderedon;
+  const [orders, setOrders] = useContext(OrdersContext);
+  const [confirmbox, setConfirmbox] = useState({
+    show: false,
+    title: "",
+    text: "",
+    ok: "",
+    no: "",
+  });
 
   const getIndianRupeeFormat = (temp) => {
     var x = temp;
@@ -40,6 +51,31 @@ function OrderDetails({ order }) {
     "November",
     "December",
   ];
+
+  const handleCancelOrder = () => {
+    setConfirmbox({
+      show: true,
+      title: "Cancel order with ID : " + orderid,
+      text: "Are you sure?",
+      ok: "Yes",
+      no: "No",
+    });
+  };
+
+  const handleConfirmBoxConfirm = () => {
+    setConfirmbox({
+      ...confirmbox,
+      show: false,
+    });
+    setOrders({
+      ordersList: orders.ordersList.filter((order) => order.id !== orderid),
+    });
+    setSnackbaralert({
+      show: true,
+      type: "success",
+      msg: "Order with ID: " + orderid + " has been canceled.",
+    });
+  };
 
   return (
     <div className="orderdetails">
@@ -103,12 +139,29 @@ function OrderDetails({ order }) {
             Quantity : {item.quantity}
           </div>
           <div className="orderdetails__price">
-            Price : <span className="rupee__symbol">₹ </span>{" "}
-            {getIndianRupeeFormat(item.price)}
-            <span className="small__decimal">.00</span>
+            <span>
+              Price : <span className="rupee__symbol">₹ </span>{" "}
+              {getIndianRupeeFormat(item.price)}
+              <span className="small__decimal">.00</span>
+            </span>
+            {delivered ? (
+              <span className="cancel__orderButton" onClick={handleCancelOrder}>
+                <CancelOutlinedIcon
+                  style={{ color: "red", fontSize: "1.2em" }}
+                />{" "}
+                <span> Cancel order</span>
+              </span>
+            ) : null}
           </div>
         </div>
       </div>
+      {confirmbox.show ? (
+        <ConfirmBox
+          confirmbox={confirmbox}
+          setConfirmbox={setConfirmbox}
+          handleConfirmBoxConfirm={handleConfirmBoxConfirm}
+        />
+      ) : null}
     </div>
   );
 }

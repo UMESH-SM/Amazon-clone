@@ -105,6 +105,16 @@
 
 .orderdetails__price {
   font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 3%;
+}
+
+.cancel__orderButton {
+  display: flex;
+  align-items: center;
+  color: red;
+  cursor: pointer;
 }
 
 .small__decimal {
