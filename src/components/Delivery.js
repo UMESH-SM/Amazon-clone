@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useRef, useState, useContext } from "react";
 import "./Delivery.css";
 import Address from "./Address";
 import NewAddress from "./NewAddress";
@@ -30,6 +30,8 @@ function Delivery() {
     });
   };
 
+  const myRef = useRef(null);
+
   return (
     <div className="delivery">
       <DeliveryStepper step={0} />
@@ -41,7 +43,9 @@ function Delivery() {
             <div className="delivery__note">
               Is the address you'd like to use displayed below? If so, click the
               corresponding "Deliver to this address" button. Or you can{" "}
-              <a href="#address">enter a new delivery address.</a>
+              <span onClick={() => window.scrollTo(0, myRef.current.offsetTop)}>
+                enter a new delivery address.
+              </span>
             </div>
             <div className="savedAddress__section">
               <div className="savedAddress__title">Defaut address</div>
@@ -90,7 +94,7 @@ function Delivery() {
             </div>
           </>
         )}
-        <div className="newAdress__section" id="address">
+        <div className="newAdress__section" ref={myRef}>
           <div className="newAddress__title">
             {edit ? "Edit address" : "Add a new address"}
           </div>

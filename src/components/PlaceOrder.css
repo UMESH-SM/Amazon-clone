@@ -13,6 +13,7 @@
 .placeorder__title {
   font-size: xx-large;
   font-weight: 500;
+  margin-bottom: 0.5%;
 }
 
 .placeorder__note {
@@ -40,7 +41,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 2%;
-  padding: 3%;
+  padding: 2% 3%;
   border: 0.1px solid rgb(206, 206, 206);
   border-radius: 2%;
 }
@@ -57,11 +58,13 @@
 .placeordershippingDetails__title {
   font-size: medium;
   font-weight: bold;
+  margin-bottom: 3%;
 }
 
 .placeorderpaymentDetails__title {
   font-size: medium;
   font-weight: bold;
+  margin-bottom: 3%;
 }
 
 .placeorder__orderDetails {
@@ -79,6 +82,7 @@
   font-size: large;
   font-weight: bold;
   color: green;
+  margin-bottom: 0.5%;
 }
 
 .placeorder__deliveryNote {

@@ -265,9 +265,8 @@ function SignUp() {
             </Button>
           </div>
         </form>
-        <div className="signup_note">
-          We will send you a text to verify your phone. Message and Data rates
-          may apply.
+        <div className="signup__note">
+          We will send an email to verify your email address.
         </div>
       </div>
       <div className="signup__account">

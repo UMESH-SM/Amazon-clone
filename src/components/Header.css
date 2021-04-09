@@ -72,9 +72,13 @@
 
 .header__changeDefaultAddressButton > Button {
   width: 100%;
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
   margin-top: 5%;
+}
+
+.header__changeDefaultAddressButton > Button:hover {
+  background-color: #de7921;
 }
 
 .header__search {
@@ -97,15 +101,23 @@
 
 .header__categoryButtons > Button {
   width: 100%;
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
   margin-bottom: 5%;
 }
 
+.header__categoryButtons > Button:hover {
+  background-color: #de7921;
+}
+
 .header__categoryLastButton > Button {
   width: 100%;
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
+}
+
+.header__categoryLastButton > Button:hover {
+  background-color: #de7921;
 }
 
 .down__arrow {
@@ -126,12 +138,16 @@
   display: flex;
   align-items: center;
   padding: 7.93px 12px;
-  background-color: #ff9900;
+  background-color: #ffa41c;
   border: none;
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
   outline: none;
   cursor: pointer;
+}
+
+.search__button:hover {
+  background-color: #de7921;
 }
 
 .header__nav {
@@ -186,40 +202,28 @@ a:-webkit-any-link {
   margin-top: -9px;
   font-weight: bolder;
   color: black;
-  background-color: #ff9900;
+  background-color: #ffa41c;
   padding: 1px 6px;
   border-radius: 50%;
 }
 
-.header__signinButton > Button {
+.header__signinsignoutButton > Button {
   width: 100%;
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
 }
 
-.header__signoutButton > Button {
-  width: 100%;
-  background-color: #ff9900;
-  text-transform: unset;
-}
-
-.header__manageAccountButton > Button {
-  width: 100%;
-  background-color: #ff9900;
-  text-transform: unset;
-  margin-bottom: 5%;
-}
-
-.header__manageAddressButton > Button {
-  width: 100%;
-  background-color: #ff9900;
-  text-transform: unset;
-  margin-bottom: 5%;
+.header__signinsignoutButton > Button:hover {
+  background-color: #de7921;
 }
 
 .header__manageCardsButton > Button {
   width: 100%;
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
   margin-bottom: 5%;
+}
+
+.header__manageCardsButton > Button:hover {
+  background-color: #de7921;
 }

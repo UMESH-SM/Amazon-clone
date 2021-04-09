@@ -39,8 +39,8 @@
 
 .signup__input > input {
   margin-top: 2%;
-  padding: 5px 10px;
-  width: 89%;
+  padding: 1.5% 4%;
+  width: 90%;
   font-size: 0.9em;
   margin-bottom: 4%;
 }
@@ -49,6 +49,7 @@
   background-color: #fcbc5d;
   border: 0.5px solid black;
   width: 100%;
+  margin-top: 3%;
 }
 
 .signup__continue > Button:hover {

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Address.css";
 import { AddressContext } from "../contexts/AddressContext";
 import { Button } from "@material-ui/core";
@@ -14,6 +14,10 @@ function ManageAddress({ dfltAdrs, item, handleEdit, handleSnackbarAlert }) {
     ok: "",
     no: "",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const {
     id,

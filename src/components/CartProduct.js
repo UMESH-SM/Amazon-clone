@@ -5,6 +5,8 @@ import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { Button, ButtonGroup } from "@material-ui/core";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 
 function CartProduct({ item }) {
   const { id, image, title, rating, reviews, price, quantity } = item;
@@ -106,13 +108,15 @@ function CartProduct({ item }) {
                     onClick={handleRemoveFromCart}
                   />
                 ) : (
-                  "–"
+                  <RemoveIcon fontSize="small" />
                 )}
               </span>
             </Button>
             <div className="quantity__value">{quantity}</div>
             <Button variant="contained" onClick={handleQuantityPlus}>
-              <span className="plus__minus">+</span>
+              <span className="plus__minus">
+                <AddIcon fontSize="small" />
+              </span>
             </Button>
           </ButtonGroup>
         </div>

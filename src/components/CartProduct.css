@@ -35,7 +35,7 @@
 
 .cartproduct__rating {
   display: flex;
-  color: #ff9900;
+  color: #ffa41c;
 }
 
 .reviews__arrow {
@@ -85,6 +85,10 @@
 }
 
 .cartproduct__removefromCart > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
+}
+
+.cartproduct__removefromCart > Button:hover {
+  background-color: #de7921;
 }

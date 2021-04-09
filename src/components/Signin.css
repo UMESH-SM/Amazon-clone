@@ -19,40 +19,53 @@
 .signin__card {
   height: 50vh;
   width: 23%;
-  padding: 15px 30px;
+  padding: 1% 2.4%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-around;
   border: 0.5px solid black;
   border-radius: 1%;
 }
 
 .signin__title {
+  width: 100%;
   font-size: xx-large;
   font-weight: 500;
+  display: flex;
+}
+
+.signin__input {
+  width: 100%;
 }
 
 .signin__input > label {
-  font-size: small;
-  font-weight: bolder;
+  font-size: 0.9em;
+  font-weight: 600;
 }
 
 .signin__input > input {
   margin-top: 2%;
-  padding: 5px 10px;
-  width: 89%;
   font-size: 0.9em;
   margin-bottom: 4%;
+  padding: 1.5% 4%;
+  display: flex;
+  justify-content: stretch;
+  width: 90%;
+}
+
+.signin__continue {
+  width: 100%;
 }
 
 .signin__continue > Button {
-  background-color: #fcbc5d;
+  background-color: #ffa41c;
   border: 0.5px solid black;
   width: 100%;
 }
 
 .signin__continue > Button:hover {
-  background-color: #ff9900;
+  background-color: #de7921;
 }
 
 .signin__note {

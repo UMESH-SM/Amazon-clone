@@ -1,0 +1,29 @@
+.addcategory {
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.addcategory__inputFields {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.addcategory__inputFields > label {
+  font-weight: 600;
+  margin-bottom: 1%;
+}
+
+.addcategory__inputFields > input {
+  font-size: 1em;
+  padding: 1.5% 3%;
+}
+
+.addcategory__inputFields > select {
+  font-size: 1em;
+  padding: 1.5% 3%;
+}

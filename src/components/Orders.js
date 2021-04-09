@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Orders.css";
 import { OrdersContext } from "../contexts/OrdersContext";
 import Header from "./Header";
@@ -12,6 +12,10 @@ function Orders() {
     msg: "",
     type: "",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="orders">

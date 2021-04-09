@@ -13,7 +13,7 @@
   font-weight: 500;
   padding: 2% 0%;
   color: rgb(221, 220, 220);
-  background-color: #232f3ed7;
+  background-color: #232f3ed3;
   border-bottom: 2px solid rgb(187, 187, 187);
   text-align: center;
 }
@@ -30,7 +30,7 @@
   font-size: 1.5em;
   font-weight: 500;
   padding: 1% 4%;
-  background-color: white;
+  background-color: rgba(236, 175, 43, 0.842);
   border-bottom: 2px solid rgb(187, 187, 187);
 }
 

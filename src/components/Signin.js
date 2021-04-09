@@ -13,7 +13,8 @@ function Signin() {
   const [signInError, setSignInError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleContinue = () => {
+  const handleContinue = (e) => {
+    e.preventDefault();
     setLoading(true);
     fire
       .auth()
@@ -67,7 +68,7 @@ function Signin() {
       <div className="signin__logo">
         <img src="amazon-logo2.png" alt="" />
       </div>
-      <div className="signin__card">
+      <form className="signin__card" onSubmit={handleContinue}>
         <div className="signin__title">Sign-In</div>
         <div className="signin__input">
           <label>Email address</label>
@@ -100,23 +101,23 @@ function Signin() {
           <Button
             variant="contained"
             size="small"
-            onClick={handleContinue}
+            type="submit"
             disableElevation
           >
             Continue
           </Button>
         </div>
         <p className="signin__note">
-          By continuing, you agree to Amazon's Conditions of Use and Privacy
-          Notice.
+          By continuing, you agree to Amazon clone's Conditions of Use and
+          Privacy Notice.
         </p>
-      </div>
+      </form>
       <div className="create__account">
         <div className="new__toAmazon">
           <span>
             <hr></hr>
           </span>
-          <span className="newtoamazon__text">New to Amazon?</span>
+          <span className="newtoamazon__text">New to Amazon clone ?</span>
           <span>
             <hr></hr>
           </span>
@@ -124,7 +125,7 @@ function Signin() {
         <div className="create__button">
           <Link className="create__accountlink" to="/signup">
             <Button variant="contained" size="small" disableElevation>
-              Create your Amazon account
+              Create your Amazon clone account
             </Button>
           </Link>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Cart.css";
 import { CartContext } from "../contexts/CartContext";
 import Header from "./Header";
@@ -22,7 +22,9 @@ function Cart() {
     });
   };
 
-  window.scrollTo(0, 0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

@@ -15,10 +15,14 @@
 }
 
 .ordersummary__placeyourorder > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
   width: 90%;
   margin-left: 5%;
+}
+
+.ordersummary__placeyourorder > Button:hover {
+  background-color: #de7921;
 }
 
 .ordersummary__details {
@@ -49,6 +53,7 @@
   justify-content: space-between;
   font-size: large;
   font-weight: bolder;
+  color: maroon;
 }
 
 .small__decimal {

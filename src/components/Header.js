@@ -207,6 +207,7 @@ function Header() {
         ...search,
         searchResults: filterSearch,
       });
+      history.push("/");
     }
   };
 
@@ -282,7 +283,10 @@ function Header() {
                 </>
               ) : (
                 <div>
-                  <Link to="/manage-addresses" className="header__signinButton">
+                  <Link
+                    to="/manage-addresses"
+                    className="header__signinsignoutButton"
+                  >
                     <Button variant="contained" size="small">
                       Set default address
                     </Button>
@@ -290,7 +294,7 @@ function Header() {
                 </div>
               )
             ) : (
-              <div className="header__signinButton">
+              <div className="header__signinsignoutButton">
                 <Button
                   variant="contained"
                   size="small"
@@ -344,13 +348,22 @@ function Header() {
                 Electronics
               </Button>
             </div>
-            <div className="header__categoryLastButton">
+            <div className="header__categoryButtons">
               <Button
                 variant="contained"
                 size="small"
                 onClick={() => handleCategory("clothing")}
               >
                 Clothing
+              </Button>
+            </div>
+            <div className="header__categoryLastButton">
+              <Button
+                variant="contained"
+                size="small"
+                onClick={() => handleCategory("footwear")}
+              >
+                Footwear
               </Button>
             </div>
           </Typography>
@@ -404,7 +417,7 @@ function Header() {
                 <div>
                   <Link
                     to="/manage-account"
-                    className="header__manageAccountButton"
+                    className="header__manageCardsButton"
                   >
                     <Button variant="contained" size="small">
                       Manage account
@@ -414,7 +427,7 @@ function Header() {
                 <div>
                   <Link
                     to="/manage-addresses"
-                    className="header__manageAddressButton"
+                    className="header__manageCardsButton"
                   >
                     <Button variant="contained" size="small">
                       Manage addresses
@@ -432,18 +445,30 @@ function Header() {
                   </Link>
                 </div>
                 {user.uid === process.env.REACT_APP_ADMIN_ID ? (
-                  <div>
-                    <Link
-                      to="/add-product"
-                      className="header__manageCardsButton"
-                    >
-                      <Button variant="contained" size="small">
-                        Add Product
-                      </Button>
-                    </Link>
-                  </div>
+                  <>
+                    <div>
+                      <Link
+                        to="/manage-categories"
+                        className="header__manageCardsButton"
+                      >
+                        <Button variant="contained" size="small">
+                          Manage Categories
+                        </Button>
+                      </Link>
+                    </div>
+                    <div>
+                      <Link
+                        to="/add-product"
+                        className="header__manageCardsButton"
+                      >
+                        <Button variant="contained" size="small">
+                          Add Product
+                        </Button>
+                      </Link>
+                    </div>
+                  </>
                 ) : null}
-                <div className="header__signoutButton">
+                <div className="header__signinsignoutButton">
                   <Button
                     variant="contained"
                     size="small"
@@ -454,7 +479,7 @@ function Header() {
                 </div>
               </>
             ) : (
-              <div className="header__signinButton">
+              <div className="header__signinsignoutButton">
                 <Button variant="contained" size="small" onClick={handleSignin}>
                   Sign in
                 </Button>

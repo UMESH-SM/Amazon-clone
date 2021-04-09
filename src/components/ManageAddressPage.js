@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useRef, useState, useContext } from "react";
 import "./Delivery.css";
 import Header from "./Header";
 import ManageAddress from "./ManageAddress";
@@ -30,6 +30,8 @@ function ManageAddressPage() {
     });
   };
 
+  const myRef = useRef(null);
+
   return (
     <div className="delivery">
       <Header />
@@ -39,7 +41,9 @@ function ManageAddressPage() {
             <div className="delivery__title">Manage addresses</div>
             <div className="delivery__note">
               Is the address you'd like to use displayed below? If not, you can{" "}
-              <a href="#address">enter a new delivery address.</a>
+              <span onClick={() => window.scrollTo(0, myRef.current.offsetTop)}>
+                enter a new delivery address.
+              </span>
             </div>
             <div className="savedAddress__section">
               <div className="savedAddress__title">Defaut address</div>
@@ -88,7 +92,7 @@ function ManageAddressPage() {
             </div>
           </>
         )}
-        <div className="newAdress__section" id="address">
+        <div className="newAddress__section" ref={myRef}>
           <div className="newAddress__title">
             {edit ? "Edit address" : "Add a new address"}
           </div>

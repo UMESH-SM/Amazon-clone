@@ -26,6 +26,7 @@ import ManageAccount from "./components/ManageAccount";
 import ManageAddressPage from "./components/ManageAddressPage";
 import ManageCardsPage from "./components/ManageCardsPage";
 import AddProduct from "./components/AddProduct";
+import ManageCategory from "./components/ManageCategory";
 import { fire, db } from "./firebase_config";
 
 require("dotenv").config();
@@ -177,6 +178,13 @@ function App() {
           <Route path="/add-product">
             {user.uid === process.env.REACT_APP_ADMIN_ID ? (
               <AddProduct />
+            ) : (
+              <Redirect to="/" />
+            )}
+          </Route>
+          <Route path="/manage-categories">
+            {user.uid === process.env.REACT_APP_ADMIN_ID ? (
+              <ManageCategory />
             ) : (
               <Redirect to="/" />
             )}

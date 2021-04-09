@@ -68,9 +68,13 @@
 }
 
 .payment__topBoxButton > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
   width: 95%;
+}
+
+.payment__topBoxButton > Button:hover {
+  background-color: #de7921;
 }
 
 .payment__topBoxNote {
@@ -223,8 +227,12 @@
 }
 
 .addcard__button > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
+}
+
+.addcard__button > Button:hover {
+  background-color: #de7921;
 }
 
 .addcardlabel__options {
@@ -254,11 +262,11 @@
   padding: 4px 10px;
 }
 
-.netbanking__button > Button {
-  background-color: #ff9900;
+/* .netbanking__button > Button {
+  background-color: #ffa41c;
   text-transform: unset;
   margin-left: 20%;
-}
+} */
 
 .upi__apps {
   margin-top: 3%;
@@ -290,11 +298,11 @@
   margin-top: 0.5%;
 }
 
-.upi__button > Button {
-  background-color: #ff9900;
+/* .upi__button > Button {
+  background-color: #ffa41c;
   text-transform: unset;
   margin-left: 20%;
-}
+} */
 
 .pod {
   margin-top: 3%;
@@ -392,9 +400,13 @@
 }
 
 .payment__bottomBoxButton > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
   width: 95%;
+}
+
+.payment__bottomBoxButton > Button:hover {
+  background-color: #de7921;
 }
 
 .payment__bottomBoxNote {

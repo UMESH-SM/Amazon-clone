@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./AddProduct.css";
 import Header from "./Header";
 import { Button } from "@material-ui/core";
@@ -12,32 +12,74 @@ function AddProduct() {
   const [searchName, setSearchName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState("");
-  const [rating, setRating] = useState("5");
+  const [rating, setRating] = useState("none");
   const [reviews, setReviews] = useState("");
-  const [category, setCategory] = useState("electronics");
-  const [subcategory, setSubcategory] = useState("");
-  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("none");
+  const [subcategory, setSubcategory] = useState("none");
+  const [brand, setBrand] = useState("none");
   const [snackbaralert, setSnackbaralert] = useState({
     show: false,
     msg: "",
     type: "",
   });
+  const [categories, setCategories] = useState(null);
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [subcategoriesList, setSubcategoriesList] = useState([]);
+  const [brandsList, setBrandsList] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    db.collection("products")
+      .doc("info")
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const productsInfo = doc.data();
+          setCategories(productsInfo);
+          setCategoriesList(productsInfo.categoriesList);
+        }
+      })
+      .catch((error) => {
+        console.log("Products info fetch error while adding products: ", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (category === "none") {
+      setSubcategoriesList([]);
+      setBrandsList([]);
+    } else {
+      categories &&
+        categories.categories.forEach((item) => {
+          if (item.category === category) {
+            setSubcategoriesList(item.subcategoriesList);
+            setBrandsList(item.brandsList);
+          }
+        });
+    }
+  }, [category]);
 
   const handleAddProduct = (e) => {
     e.preventDefault();
-    if (category === "" || category === "none") {
+    if (rating === "none") {
+      setSnackbaralert({
+        show: true,
+        type: "error",
+        msg: "Please select a rating.",
+      });
+    } else if (category === "none") {
       setSnackbaralert({
         show: true,
         type: "error",
         msg: "Please select a category.",
       });
-    } else if (subcategory === "" || subcategory === "none") {
+    } else if (subcategory === "none") {
       setSnackbaralert({
         show: true,
         type: "error",
         msg: "Please select a subcategory.",
       });
-    } else if (brand === "" || brand === "none") {
+    } else if (brand === "none") {
       setSnackbaralert({
         show: true,
         type: "error",
@@ -45,10 +87,14 @@ function AddProduct() {
       });
     } else {
       let productsCopy = products;
+      let newCategory = true;
+      let newSubcategory = true;
       productsCopy.productsList.forEach((categoryItem) => {
         if (categoryItem.category === category) {
+          newCategory = false;
           categoryItem.categoryItems.forEach((subcategoryItem) => {
             if (subcategoryItem.subcategory === subcategory) {
+              newSubcategory = false;
               subcategoryItem.subcategoryItems.push({
                 id: category + "_" + subcategory + "_" + new Date().getTime(),
                 title: displayName,
@@ -64,8 +110,55 @@ function AddProduct() {
               });
             }
           });
+          if (newSubcategory) {
+            categoryItem.categoryItems.push({
+              subcategory: subcategory,
+              subcategoryItems: [
+                {
+                  id: category + "_" + subcategory + "_" + new Date().getTime(),
+                  title: displayName,
+                  searchName,
+                  image: imageUrl.split(",")[0],
+                  images: imageUrl.split(","),
+                  price: parseInt(price),
+                  rating: parseInt(rating),
+                  reviews: parseInt(reviews),
+                  category,
+                  subcategory,
+                  brand,
+                },
+              ],
+            });
+          }
         }
       });
+
+      if (newCategory) {
+        productsCopy.productsList.push({
+          category: category,
+          categoryItems: [
+            {
+              subcategory: subcategory,
+              subcategoryItems: [
+                {
+                  id: category + "_" + subcategory + "_" + new Date().getTime(),
+                  title: displayName,
+                  searchName,
+                  image: imageUrl.split(",")[0],
+                  images: imageUrl.split(","),
+                  price: parseInt(price),
+                  rating: parseInt(rating),
+                  reviews: parseInt(reviews),
+                  category,
+                  subcategory,
+                  brand,
+                },
+              ],
+            },
+          ],
+        });
+      }
+
       setProducts(productsCopy);
 
       db.collection("products")
@@ -76,7 +169,7 @@ function AddProduct() {
           setSnackbaralert({
             show: true,
             type: "success",
-            msg: "Product added.",
+            msg: searchName + " added.",
           });
         })
         .catch((error) => {
@@ -95,7 +188,9 @@ function AddProduct() {
     setReviews("");
   };
 
-  window.scrollTo(0, 0);
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
   return (
     <>
@@ -152,9 +247,10 @@ function AddProduct() {
               <div className="addproduct__input">
                 <label>Rating</label>
                 <select
-                  defaultValue="5"
+                  defaultValue="none"
                   onChange={(e) => setRating(e.target.value)}
                 >
+                  <option value="none">--- select ---</option>
                   <option value="5">5</option>
                   <option value="4">4</option>
                   <option value="3">3</option>
@@ -178,122 +274,48 @@ function AddProduct() {
               <div className="addproduct__input">
                 <label>Category</label>
                 <select
-                  defaultValue="electronics"
+                  defaultValue="none"
                   onChange={(e) => setCategory(e.target.value)}
                 >
-                  <option value="electronics">Electronics</option>
-                  <option value="clothing">Clothing</option>
-                  <option value="others">Others</option>
+                  <option value="none">--- select ---</option>
+                  {categoriesList &&
+                    categoriesList.map((item, i) => (
+                      <option key={i} value={item}>
+                        {capitalizeFirstLetter(item)}
+                      </option>
+                    ))}
                 </select>
               </div>
               <div className="addproduct__input">
                 <label>Sub-category</label>
-                {category === "electronics" ? (
-                  <select
-                    defaultValue="none"
-                    onChange={(e) => setSubcategory(e.target.value)}
-                  >
-                    <option value="none">--- select ---</option>
-                    <option value="laptops">Laptops</option>
-                    <option value="mobiles">Mobiles</option>
-                    <option value="tablets">Tablets</option>
-                    <option value="televisions">Televisions</option>
-                    <option value="smartwatches">Smartwatches</option>
-                    <option value="others">Others</option>
-                  </select>
-                ) : null}
-                {category === "clothing" ? (
-                  <select
-                    defaultValue="none"
-                    onChange={(e) => setSubcategory(e.target.value)}
-                  >
-                    <option value="none">--- select ---</option>
-                    <option value="jeans">Jeans</option>
-                    <option value="t-shirts">T-Shirts</option>
-                    <option value="shirts">Shirts</option>
-                    <option value="trousers">Trousers</option>
-                    <option value="pants">Pants</option>
-                    <option value="others">Others</option>
-                  </select>
-                ) : null}
-                {category === "others" ? (
-                  <select
-                    defaultValue="others"
-                    onChange={(e) => setSubcategory(e.target.value)}
-                  >
-                    <option value="others">Others</option>
-                  </select>
-                ) : null}
+                <select
+                  defaultValue="none"
+                  onChange={(e) => setSubcategory(e.target.value)}
+                >
+                  <option value="none">--- select ---</option>
+                  {subcategoriesList &&
+                    subcategoriesList.map((item, i) => (
+                      <option key={i} value={item}>
+                        {capitalizeFirstLetter(item)}
+                      </option>
+                    ))}
+                </select>
               </div>
               <div className="addproduct__input">
                 <label>Brand</label>
-                {category === "electronics" ? (
-                  <select
-                    defaultValue="none"
-                    onChange={(e) => setBrand(e.target.value)}
-                  >
-                    <option value="none">--- select ---</option>
-                    <option value="acer">Acer</option>
-                    <option value="apple">Apple</option>
-                    <option value="avita">Avita</option>
-                    <option value="asus">Asus</option>
-                    <option value="dell">Dell</option>
-                    <option value="google">Google</option>
-                    <option value="honor">Honor</option>
-                    <option value="hp">HP</option>
-                    <option value="huawei">Huawei</option>
-                    <option value="lenovo">Lenovo</option>
-                    <option value="lg">LG</option>
-                    <option value="mi">MI</option>
-                    <option value="microsoft">Microsoft</option>
-                    <option value="oneplus">Oneplus</option>
-                    <option value="oppo">Oppo</option>
-                    <option value="panasonic">Panasonic</option>
-                    <option value="realme">Realme</option>
-                    <option value="redmi">Redmi</option>
-                    <option value="tcl">TCL</option>
-                    <option value="samsung">Samsung</option>
-                    <option value="sony">Sony</option>
-                    <option value="vivo">Vivo</option>
-                    <option value="vu">VU</option>
-                    <option value="others">Others</option>
-                  </select>
-                ) : null}
-                {category === "clothing" ? (
-                  <select
-                    defaultValue="none"
-                    onChange={(e) => setBrand(e.target.value)}
-                  >
-                    <option value="none">--- select ---</option>
-                    <option value="adidas">Adidas</option>
-                    <option value="allen-solly">Allen Solly</option>
-                    <option value="deisel">Deisel</option>
-                    <option value="flying-machine">Flying Machine</option>
-                    <option value="levis">Levi's</option>
-                    <option value="lee-cooper">Lee Cooper</option>
-                    <option value="mufti">Mufti</option>
-                    <option value="nike">Nike</option>
-                    <option value="park-avenue">Park Avenue</option>
-                    <option value="pepe-jeans">Pepe Jeans</option>
-                    <option value="peter-england">Peter England</option>
-                    <option value="provogue">Provogue</option>
-                    <option value="puma">Puma</option>
-                    <option value="raymond">Raymond</option>
-                    <option value="tommy-hilfiger">Tommy Hilfiger</option>
-                    <option value="us-polo">US Polo</option>
-                    <option value="van-heusen">Van-Heusen</option>
-                    <option value="wrangler">Wrangler</option>
-                    <option value="others">Others</option>
-                  </select>
-                ) : null}
-                {category === "others" ? (
-                  <select
-                    defaultValue="others"
-                    onChange={(e) => setBrand(e.target.value)}
-                  >
-                    <option value="others">Others</option>
-                  </select>
-                ) : null}
+                <select
+                  defaultValue="none"
+                  onChange={(e) => setBrand(e.target.value)}
+                >
+                  <option value="none">--- select ---</option>
+                  {brandsList &&
+                    brandsList.map((item, i) => (
+                      <option key={i} value={item}>
+                        {capitalizeFirstLetter(item)}
+                      </option>
+                    ))}
+                  <option value="others">Others</option>
+                </select>
               </div>
             </div>
           </div>

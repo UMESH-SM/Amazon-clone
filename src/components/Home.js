@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Home.css";
 import { ProductContext } from "../contexts/ProductContext";
 import { SearchContext } from "../contexts/SearchContext";
@@ -19,41 +19,13 @@ function Home() {
     type: "",
   });
 
-  let mobilesList = [];
-  let laptopsList = [];
-  let tabletsList = [];
-  let televisionsList = [];
-  let shirtsList = [];
-  let tshirtsList = [];
-  let trousersList = [];
-  let jeansList = [];
-  products.productsList.forEach((categoryItem) => {
-    if (categoryItem.category === "electronics") {
-      categoryItem.categoryItems.forEach((subcategoryItem) => {
-        if (subcategoryItem.subcategory === "mobiles") {
-          mobilesList = subcategoryItem.subcategoryItems;
-        } else if (subcategoryItem.subcategory === "laptops") {
-          laptopsList = subcategoryItem.subcategoryItems;
-        } else if (subcategoryItem.subcategory === "tablets") {
-          tabletsList = subcategoryItem.subcategoryItems;
-        } else if (subcategoryItem.subcategory === "televisions") {
-          televisionsList = subcategoryItem.subcategoryItems;
-        }
-      });
-    } else if (categoryItem.category === "clothing") {
-      categoryItem.categoryItems.forEach((subcategoryItem) => {
-        if (subcategoryItem.subcategory === "shirts") {
-          shirtsList = subcategoryItem.subcategoryItems;
-        } else if (subcategoryItem.subcategory === "t-shirts") {
-          tshirtsList = subcategoryItem.subcategoryItems;
-        } else if (subcategoryItem.subcategory === "trousers") {
-          trousersList = subcategoryItem.subcategoryItems;
-        } else if (subcategoryItem.subcategory === "jeans") {
-          jeansList = subcategoryItem.subcategoryItems;
-        }
-      });
-    }
-  });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [search]);
 
   const handleEditProduct = (
     id,
@@ -101,11 +73,45 @@ function Home() {
         setSnackbaralert({
           show: true,
           type: "success",
-          msg: "Product updated.",
+          msg: searchName + " updated.",
         });
       })
       .catch((error) => {
         console.error("Error editing product: ", error);
+      });
+
+    setProducts({
+      productsList: productsCopy.productsList,
+    });
+  };
+
+  const handleDeleteProduct = (category, subcategory, id, searchName) => {
+    let productsCopy = products;
+    productsCopy.productsList.forEach((categoryItem) => {
+      if (categoryItem.category === category) {
+        categoryItem.categoryItems.forEach((subcategoryItem) => {
+          if (subcategoryItem.subcategory === subcategory) {
+            subcategoryItem.subcategoryItems = subcategoryItem.subcategoryItems.filter(
+              (item) => item.id !== id
+            );
+          }
+        });
+      }
+    });
+
+    db.collection("products")
+      .doc("productsDoc")
+      .set(productsCopy)
+      .then(() => {
+        console.log("Product deleted.");
+        setSnackbaralert({
+          show: true,
+          type: "success",
+          msg: searchName + " deleted.",
+        });
+      })
+      .catch((error) => {
+        console.error("Error deleting product: ", error);
       });
 
     setProducts({
@@ -136,6 +142,75 @@ function Home() {
     }, speed);
   };
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  const categoryDisplay = (categoryItem, i) => {
+    let noSubcategories = true;
+    const subcategoryDisplay = categoryItem.categoryItems.map(
+      (subcategoryItem, j) => {
+        return subcategoryItem.subcategoryItems.length ? (
+          <div className="home__productsLayer">
+            {(noSubcategories = false)}
+            <div className="home__productsSubcategory">
+              {capitalizeFirstLetter(subcategoryItem.subcategory)}
+            </div>
+            <div
+              id={`home__productsContainer${i}${j}`}
+              className="home__productsContainer"
+            >
+              {subcategoryItem.subcategoryItems.map((item) => (
+                <Product
+                  key={item.id}
+                  item={item}
+                  handleEditProduct={handleEditProduct}
+                  handleDeleteProduct={handleDeleteProduct}
+                  handleSnackbarAlert={handleSnackbarAlert}
+                />
+              ))}
+            </div>
+            <span
+              className="homeproductsContainer__LeftScroll"
+              onClick={() => {
+                const container = document.getElementById(
+                  `home__productsContainer${i}${j}`
+                );
+                sideScroll(container, "left", 25, 1500, 60);
+              }}
+            >
+              <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
+            </span>
+            <span
+              className="homeproductsContainer__RightScroll"
+              onClick={() => {
+                const container = document.getElementById(
+                  `home__productsContainer${i}${j}`
+                );
+                sideScroll(container, "right", 25, 1500, 60);
+              }}
+            >
+              <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
+            </span>
+          </div>
+        ) : null;
+      }
+    );
+
+    if (noSubcategories) {
+      return null;
+    }
+
+    return (
+      <>
+        <div className="home__productsCategory">
+          {capitalizeFirstLetter(categoryItem.category)}
+        </div>
+        {subcategoryDisplay}
+      </>
+    );
+  };
+
   return search.searchResults.length ? (
     search.searchResults[0].id === "empty" ? (
       <>
@@ -157,6 +232,7 @@ function Home() {
                 key={item.id}
                 item={item}
                 handleEditProduct={handleEditProduct}
+                handleDeleteProduct={handleDeleteProduct}
                 handleSnackbarAlert={handleSnackbarAlert}
               />
             ))}
@@ -175,428 +251,9 @@ function Home() {
       <Header />
       <Carousel />
       <div className="home">
-        <div className="home__productsCategory">Electronics</div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Mobiles</div>
-          <div
-            id="home__productsContainer1"
-            className="home__productsContainer"
-          >
-            {mobilesList.map((item) => (
-              <Product
-                key={item.id}
-                item={item}
-                handleEditProduct={handleEditProduct}
-                handleSnackbarAlert={handleSnackbarAlert}
-              />
-            ))}
-          </div>
-          <span
-            className="homeproductsContainer__LeftScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer1"
-              );
-              sideScroll(container, "left", 25, 1500, 60);
-            }}
-          >
-            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-          <span
-            className="homeproductsContainer__RightScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer1"
-              );
-              sideScroll(container, "right", 25, 1500, 60);
-            }}
-          >
-            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Laptops</div>
-          <div
-            id="home__productsContainer2"
-            className="home__productsContainer"
-          >
-            {laptopsList.map((item) => (
-              <Product
-                key={item.id}
-                item={item}
-                handleEditProduct={handleEditProduct}
-                handleSnackbarAlert={handleSnackbarAlert}
-              />
-            ))}
-          </div>
-          <span
-            className="homeproductsContainer__LeftScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer2"
-              );
-              sideScroll(container, "left", 25, 1500, 60);
-            }}
-          >
-            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-          <span
-            className="homeproductsContainer__RightScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer2"
-              );
-              sideScroll(container, "right", 25, 1500, 60);
-            }}
-          >
-            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Tablets</div>
-          <div
-            id="home__productsContainer3"
-            className="home__productsContainer"
-          >
-            {tabletsList.map((item) => (
-              <Product
-                key={item.id}
-                item={item}
-                handleEditProduct={handleEditProduct}
-                handleSnackbarAlert={handleSnackbarAlert}
-              />
-            ))}
-          </div>
-          <span
-            className="homeproductsContainer__LeftScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer3"
-              );
-              sideScroll(container, "left", 25, 1500, 60);
-            }}
-          >
-            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-          <span
-            className="homeproductsContainer__RightScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer3"
-              );
-              sideScroll(container, "right", 25, 1500, 60);
-            }}
-          >
-            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Televisions</div>
-          <div
-            id="home__productsContainer4"
-            className="home__productsContainer"
-          >
-            {televisionsList.map((item) => (
-              <Product
-                key={item.id}
-                item={item}
-                handleEditProduct={handleEditProduct}
-                handleSnackbarAlert={handleSnackbarAlert}
-              />
-            ))}
-          </div>
-          <span
-            className="homeproductsContainer__LeftScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer4"
-              );
-              sideScroll(container, "left", 25, 1500, 60);
-            }}
-          >
-            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-          <span
-            className="homeproductsContainer__RightScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer4"
-              );
-              sideScroll(container, "right", 25, 1500, 60);
-            }}
-          >
-            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-        </div>
-        <div className="home__productsCategory">Clothing</div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Shirts</div>
-          <div
-            id="home__productsContainer5"
-            className="home__productsContainer"
-          >
-            {shirtsList.map((item) => (
-              <Product
-                key={item.id}
-                item={item}
-                handleEditProduct={handleEditProduct}
-                handleSnackbarAlert={handleSnackbarAlert}
-              />
-            ))}
-          </div>
-          <span
-            className="homeproductsContainer__LeftScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer5"
-              );
-              sideScroll(container, "left", 25, 1500, 60);
-            }}
-          >
-            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-          <span
-            className="homeproductsContainer__RightScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer5"
-              );
-              sideScroll(container, "right", 25, 1500, 60);
-            }}
-          >
-            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">T-Shirts</div>
-          <div
-            id="home__productsContainer6"
-            className="home__productsContainer"
-          >
-            {tshirtsList.map((item) => (
-              <Product
-                key={item.id}
-                item={item}
-                handleEditProduct={handleEditProduct}
-                handleSnackbarAlert={handleSnackbarAlert}
-              />
-            ))}
-          </div>
-          <span
-            className="homeproductsContainer__LeftScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer6"
-              );
-              sideScroll(container, "left", 25, 1500, 60);
-            }}
-          >
-            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-          <span
-            className="homeproductsContainer__RightScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer6"
-              );
-              sideScroll(container, "right", 25, 1500, 60);
-            }}
-          >
-            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Trousers</div>
-          <div
-            id="home__productsContainer7"
-            className="home__productsContainer"
-          >
-            {trousersList.map((item) => (
-              <Product
-                key={item.id}
-                item={item}
-                handleEditProduct={handleEditProduct}
-                handleSnackbarAlert={handleSnackbarAlert}
-              />
-            ))}
-          </div>
-          <span
-            className="homeproductsContainer__LeftScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer7"
-              );
-              sideScroll(container, "left", 25, 1500, 60);
-            }}
-          >
-            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-          <span
-            className="homeproductsContainer__RightScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer7"
-              );
-              sideScroll(container, "right", 25, 1500, 60);
-            }}
-          >
-            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Jeans</div>
-          <div
-            id="home__productsContainer8"
-            className="home__productsContainer"
-          >
-            {jeansList.map((item) => (
-              <Product
-                key={item.id}
-                item={item}
-                handleEditProduct={handleEditProduct}
-                handleSnackbarAlert={handleSnackbarAlert}
-              />
-            ))}
-          </div>
-          <span
-            className="homeproductsContainer__LeftScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer8"
-              );
-              sideScroll(container, "left", 25, 1500, 60);
-            }}
-          >
-            <ChevronLeftIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-          <span
-            className="homeproductsContainer__RightScroll"
-            onClick={() => {
-              const container = document.getElementById(
-                "home__productsContainer8"
-              );
-              sideScroll(container, "right", 25, 1500, 60);
-            }}
-          >
-            <ChevronRightIcon style={{ fontSize: "3em", color: "grey" }} />
-          </span>
-        </div>
-        {/* <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Televisions</div>
-          <div className="home__productsContainer">
-            {products.map((item) => (
-              <Product
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                rating={item.rating}
-                price={item.price}
-                inCart={item.inCart}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Tablets</div>
-          <div className="home__productsContainer">
-            {products.map((item) => (
-              <Product
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                rating={item.rating}
-                price={item.price}
-                inCart={item.inCart}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="home__productsCategory">Clothing</div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Shirts</div>
-          <div className="home__productsContainer">
-            {products.map((item) => (
-              <Product
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                rating={item.rating}
-                price={item.price}
-                inCart={item.inCart}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">T-Shirts</div>
-          <div className="home__productsContainer">
-            {products.map((item) => (
-              <Product
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                rating={item.rating}
-                price={item.price}
-                inCart={item.inCart}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Pants</div>
-          <div className="home__productsContainer">
-            {products.map((item) => (
-              <Product
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                rating={item.rating}
-                price={item.price}
-                inCart={item.inCart}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="home__productsCategory">Footwear</div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Shoes</div>
-          <div className="home__productsContainer">
-            {products.map((item) => (
-              <Product
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                rating={item.rating}
-                price={item.price}
-                inCart={item.inCart}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="home__productsLayer">
-          <div className="home__productsSubcategory">Sandals</div>
-          <div className="home__productsContainer">
-            {products.map((item) => (
-              <Product
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                rating={item.rating}
-                price={item.price}
-                inCart={item.inCart}
-              />
-            ))}
-          </div>
-        </div> */}
+        {products.productsList.map((categoryItem, i) => {
+          return categoryDisplay(categoryItem, i);
+        })}
       </div>
       {snackbaralert.show ? (
         <SnackBar

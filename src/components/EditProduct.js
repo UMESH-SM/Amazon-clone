@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddProduct.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import EditIcon from "@material-ui/icons/Edit";
+import ConfirmBox from "./ConfirmBox";
+import { db } from "../firebase_config";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -25,7 +27,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditProduct({ item, handleEditProduct }) {
+export default function EditProduct({
+  item,
+  handleEditProduct,
+  handleDeleteProduct,
+}) {
   let imagesUrls = "";
   item.images.forEach((image, i) => {
     if (i === 0) {
@@ -46,6 +52,51 @@ export default function EditProduct({ item, handleEditProduct }) {
   const [category, setCategory] = useState(item.category);
   const [subcategory, setSubcategory] = useState(item.subcategory);
   const [brand, setBrand] = useState(item.brand);
+  const [confirmbox, setConfirmbox] = useState({
+    show: false,
+    title: "",
+    text: "",
+    ok: "",
+    no: "",
+  });
+  const [categories, setCategories] = useState(null);
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [subcategoriesList, setSubcategoriesList] = useState([]);
+  const [brandsList, setBrandsList] = useState([]);
+
+  useEffect(() => {
+    db.collection("products")
+      .doc("info")
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          const productsInfo = doc.data();
+          setCategories(productsInfo);
+          setCategoriesList(productsInfo.categoriesList);
+        }
+      })
+      .catch((error) => {
+        console.log(
+          "Products info fetch error while editing products: ",
+          error
+        );
+      });
+  }, []);
+
+  useEffect(() => {
+    if (category === "none") {
+      setSubcategoriesList([]);
+      setBrandsList([]);
+    } else {
+      categories &&
+        categories.categories.forEach((item) => {
+          if (item.category === category) {
+            setSubcategoriesList(item.subcategoriesList);
+            setBrandsList(item.brandsList);
+          }
+        });
+    }
+  }, [category]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -89,6 +140,34 @@ export default function EditProduct({ item, handleEditProduct }) {
       subcategory,
       brand
     );
+  };
+
+  const handleDeleteProductConfirm = () => {
+    setConfirmbox({
+      show: true,
+      title: "Delete Product",
+      text: "Are you sure?",
+      ok: "Yes",
+      no: "No",
+    });
+  };
+
+  const handleConfirmBoxConfirm = () => {
+    setConfirmbox({
+      ...confirmbox,
+      show: false,
+    });
+    handleClose();
+    handleDeleteProduct(
+      item.category,
+      item.subcategory,
+      item.id,
+      item.searchName
+    );
+  };
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   return (
@@ -202,126 +281,68 @@ export default function EditProduct({ item, handleEditProduct }) {
               <div className="addproduct__container4">
                 <div className="addproduct__input">
                   <label>Category</label>
-
                   <select
                     defaultValue={category}
                     onChange={(e) => setCategory(e.target.value)}
                   >
-                    <option value="electronics">Electronics</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="others">Others</option>
+                    {categoriesList &&
+                      categoriesList.map((item, i) => (
+                        <option key={i} value={item}>
+                          {capitalizeFirstLetter(item)}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="addproduct__input">
                   <label>Sub-category</label>
-                  {category === "electronics" ? (
-                    <select
-                      defaultValue={subcategory}
-                      onChange={(e) => setSubcategory(e.target.value)}
-                    >
-                      <option value="laptops">Laptops</option>
-                      <option value="mobiles">Mobiles</option>
-                      <option value="tablets">Tablets</option>
-                      <option value="televisions">Televisions</option>
-                      <option value="smartwatches">Smartwatches</option>
-                      <option value="others">Others</option>
-                    </select>
-                  ) : null}
-                  {category === "clothing" ? (
-                    <select
-                      defaultValue={subcategory}
-                      onChange={(e) => setSubcategory(e.target.value)}
-                    >
-                      <option value="jeans">Jeans</option>
-                      <option value="t-shirts">T-Shirts</option>
-                      <option value="shirts">Shirts</option>
-                      <option value="trousers">Trousers</option>
-                      <option value="pants">Pants</option>
-                      <option value="others">Others</option>
-                    </select>
-                  ) : null}
-                  {category === "others" ? (
-                    <select
-                      defaultValue="others"
-                      onChange={(e) => setSubcategory(e.target.value)}
-                    >
-                      <option value="others">Others</option>
-                    </select>
-                  ) : null}
+                  <select
+                    defaultValue={subcategory}
+                    onChange={(e) => setSubcategory(e.target.value)}
+                  >
+                    {subcategoriesList &&
+                      subcategoriesList.map((item, i) => (
+                        <option key={i} value={item}>
+                          {capitalizeFirstLetter(item)}
+                        </option>
+                      ))}
+                  </select>
                 </div>
                 <div className="addproduct__input">
                   <label>Brand</label>
-                  {category === "electronics" ? (
-                    <select
-                      defaultValue={brand}
-                      onChange={(e) => setBrand(e.target.value)}
-                    >
-                      <option value="acer">Acer</option>
-                      <option value="apple">Apple</option>
-                      <option value="avita">Avita</option>
-                      <option value="asus">Asus</option>
-                      <option value="dell">Dell</option>
-                      <option value="google">Google</option>
-                      <option value="honor">Honor</option>
-                      <option value="hp">HP</option>
-                      <option value="huawei">Huawei</option>
-                      <option value="lenovo">Lenovo</option>
-                      <option value="lg">LG</option>
-                      <option value="mi">MI</option>
-                      <option value="microsoft">Microsoft</option>
-                      <option value="oneplus">Oneplus</option>
-                      <option value="oppo">Oppo</option>
-                      <option value="panasonic">Panasonic</option>
-                      <option value="realme">Realme</option>
-                      <option value="redmi">Redmi</option>
-                      <option value="tcl">TCL</option>
-                      <option value="samsung">Samsung</option>
-                      <option value="sony">Sony</option>
-                      <option value="vivo">Vivo</option>
-                      <option value="vu">VU</option>
-                      <option value="others">Others</option>
-                    </select>
-                  ) : null}
-                  {category === "clothing" ? (
-                    <select
-                      defaultValue={brand}
-                      onChange={(e) => setBrand(e.target.value)}
-                    >
-                      <option value="adidas">Adidas</option>
-                      <option value="allen-solly">Allen Solly</option>
-                      <option value="deisel">Deisel</option>
-                      <option value="flying-machine">Flying Machine</option>
-                      <option value="levis">Levi's</option>
-                      <option value="lee-cooper">Lee Cooper</option>
-                      <option value="mufti">Mufti</option>
-                      <option value="nike">Nike</option>
-                      <option value="park-avenue">Park Avenue</option>
-                      <option value="pepe-jeans">Pepe Jeans</option>
-                      <option value="peter-england">Peter England</option>
-                      <option value="provogue">Provogue</option>
-                      <option value="puma">Puma</option>
-                      <option value="raymond">Raymond</option>
-                      <option value="tommy-hilfiger">Tommy Hilfiger</option>
-                      <option value="us-polo">US Polo</option>
-                      <option value="van-heusen">Van-Heusen</option>
-                      <option value="wrangler">Wrangler</option>
-                      <option value="others">Others</option>
-                    </select>
-                  ) : null}
-                  {category === "others" ? (
-                    <select
-                      defaultValue="others"
-                      onChange={(e) => setBrand(e.target.value)}
-                    >
-                      <option value="others">Others</option>
-                    </select>
-                  ) : null}
+                  <select
+                    defaultValue={brand}
+                    onChange={(e) => setBrand(e.target.value)}
+                  >
+                    {brandsList &&
+                      brandsList.map((item, i) => (
+                        <option key={i} value={item}>
+                          {capitalizeFirstLetter(item)}
+                        </option>
+                      ))}
+                    <option value="others">Others</option>
+                  </select>
                 </div>
               </div>
+            </div>
+            <div className="editproduct__deleteproductButton">
+              <Button
+                variant="contained"
+                size="small"
+                onClick={handleDeleteProductConfirm}
+              >
+                Delete Product
+              </Button>
             </div>
           </div>
         </form>
       </Dialog>
+      {confirmbox.show ? (
+        <ConfirmBox
+          confirmbox={confirmbox}
+          setConfirmbox={setConfirmbox}
+          handleConfirmBoxConfirm={handleConfirmBoxConfirm}
+        />
+      ) : null}
     </div>
   );
 }

@@ -67,13 +67,33 @@
 }
 
 .addproduct__addButton > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
   margin-top: 2%;
   margin-bottom: 2%;
 }
 
+.addproduct__addButton > Button:hover {
+  background-color: #de7921;
+}
+
 .rupee__symbol__large {
   font-size: 1em;
   font-weight: 600;
+}
+
+.editproduct__deleteproductButton {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.editproduct__deleteproductButton > Button {
+  color: white;
+  background-color: rgb(255, 60, 60);
+  text-transform: none;
+}
+
+.editproduct__deleteproductButton > Button:hover {
+  background-color: rgb(110, 0, 0);
 }

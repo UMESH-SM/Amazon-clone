@@ -8,13 +8,37 @@
   padding: 10px 10px;
 }
 
+.subtotal__note {
+  display: flex;
+  align-items: center;
+}
+
+.subtotal__note > span {
+  margin-left: 2%;
+}
+
 .small__decimal {
   font-size: smaller;
 }
 
+.subtotal__price {
+  margin-left: 7%;
+  font-size: large;
+  font-weight: bolder;
+  color: maroon;
+}
+
+.gift__box {
+  margin-left: 7%;
+}
+
 .subtotal__proceedButton > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
   width: 80%;
   margin-left: 10%;
+}
+
+.subtotal__proceedButton > Button:hover {
+  background-color: #de7921;
 }

@@ -35,22 +35,27 @@ function Subtotal({ handleSnackbarAlert }) {
   ) : (
     <div className="subtotal">
       {cart.total < 500 ? (
-        <div className="note">
-          <ErrorOutlinedIcon style={{ color: "#29a3a3" }} /> Add{" "}
-          <span className="rupee__symbol">₹</span> {500 - cart.total}
-          <span className="small__decimal">.00</span> of eligible items to your
-          order to qualify for FREE Delivery. Details
+        <div className="subtotal__note">
+          <ErrorOutlinedIcon style={{ color: "#29a3a3" }} />
+          <span>
+            Add <span className="rupee__symbol">₹</span> {500 - cart.total}
+            <span className="small__decimal">.00</span> of eligible items to
+            your order to qualify for FREE Delivery. Details
+          </span>
         </div>
       ) : (
-        <div className="note">
-          <CheckCircleIcon style={{ color: "green" }} /> Your order is eligible
-          for FREE Delivery. Select this option at checkout. Details
+        <div className="subtotal__note">
+          <CheckCircleIcon style={{ color: "green" }} />{" "}
+          <span>
+            Your order is eligible for FREE Delivery. Select this option at
+            checkout. Details
+          </span>
         </div>
       )}
 
       <div className="subtotal__price">
-        Subtotal ({cart.size} item{cart.size > 1 ? "s" : null}):
-        <span className="rupee__symbol"> {"  ₹"}</span>
+        Subtotal ({cart.size} item{cart.size > 1 ? "s" : null}) :
+        <span className="rupee__symbol"> {"   ₹ "}</span>
         <span className="price">
           {getIndianRupeeFormat(cart.total)}
           <span className="small__decimal">.00</span>

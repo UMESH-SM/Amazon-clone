@@ -13,7 +13,7 @@
 }
 
 .product:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .product__info {
@@ -29,7 +29,7 @@
 
 .productinfo__rating {
   display: flex;
-  color: #ff9900;
+  color: #ffa41c;
 }
 
 .reviews__arrow {
@@ -77,8 +77,12 @@
 }
 
 .productinfo__addtoCart > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
+}
+
+.productinfo__addtoCart > Button:hover {
+  background-color: #de7921;
 }
 
 .productEdit__container {

@@ -14,12 +14,9 @@
   margin-bottom: 1%;
 }
 
-.delivery__note > a {
+.delivery__note > span {
   color: blue;
-}
-.delivery__note > a:hover {
-  color: orange;
-  text-decoration: underline;
+  cursor: pointer;
 }
 
 .savedAddress__title {

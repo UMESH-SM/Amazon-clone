@@ -9,7 +9,12 @@ import { Redirect } from "react-router-dom";
 import EditProduct from "./EditProduct";
 import ProductDescription from "./ProductDescription";
 
-function Product({ item, handleEditProduct, handleSnackbarAlert }) {
+function Product({
+  item,
+  handleEditProduct,
+  handleDeleteProduct,
+  handleSnackbarAlert,
+}) {
   const {
     id,
     title,
@@ -156,7 +161,11 @@ function Product({ item, handleEditProduct, handleSnackbarAlert }) {
         </Button>
       </div>
       {user.uid === process.env.REACT_APP_ADMIN_ID ? (
-        <EditProduct item={item} handleEditProduct={handleEditProduct} />
+        <EditProduct
+          item={item}
+          handleEditProduct={handleEditProduct}
+          handleDeleteProduct={handleDeleteProduct}
+        />
       ) : null}
       {productDescription.show ? (
         <ProductDescription

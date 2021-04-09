@@ -111,6 +111,7 @@ function Carousel() {
         activeStep={activeStep}
         nextButton={
           <Button
+            disableRipple={true}
             className={classes.rightArrow}
             onClick={() => handleNext(activeStep)}
           >
@@ -119,6 +120,7 @@ function Carousel() {
         }
         backButton={
           <Button
+            disableRipple={true}
             className={classes.leftArrow}
             onClick={() => handleBack(activeStep)}
           >

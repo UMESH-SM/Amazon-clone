@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Payment.css";
 import Header from "./Header";
 import { CardsContext } from "../contexts/CardsContext";
@@ -25,6 +25,10 @@ function ManageCardsPage() {
     id: "",
     name: "",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   let cardname = "";
   let cardnumber = "";
