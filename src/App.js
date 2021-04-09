@@ -27,6 +27,7 @@ import ManageAddressPage from "./components/ManageAddressPage";
 import ManageCardsPage from "./components/ManageCardsPage";
 import AddProduct from "./components/AddProduct";
 import ManageCategory from "./components/ManageCategory";
+import ForgotPassword from "./components/ForgotPassword";
 import { fire, db } from "./firebase_config";
 
 require("dotenv").config();
@@ -147,6 +148,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignUp />
+          </Route>
+          <Route path="/forgot-password">
+            <ForgotPassword />
           </Route>
           <Route path="/cart">
             {user.uid ? <Cart /> : <Redirect to="/" />}

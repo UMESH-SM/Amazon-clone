@@ -92,6 +92,11 @@ function Signin() {
           />
           <p className="error__line">{signInError}</p>
         </div>
+
+        <Link className="signin__fotgotpassword" to="/forgot-password">
+          <span>Forgot Password?</span>
+        </Link>
+
         {loading ? (
           <div className="signin__loading">
             <CircularProgress style={{ color: "grey" }} />

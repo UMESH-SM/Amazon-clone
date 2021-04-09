@@ -28,6 +28,10 @@
 }
 
 .orderplaced__button > Button {
-  background-color: #ff9900;
+  background-color: #ffa41c;
   text-transform: unset;
+}
+
+.orderplaced__button > Button:hover {
+  background-color: #de7921;
 }

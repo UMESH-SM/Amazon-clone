@@ -153,20 +153,14 @@ function ManageAccount() {
       <div className="manageaccount__container">
         <div className="manageaccount__title">Manage account</div>
         <div className="manageaccount__details">
-          <table>
-            <tr>
-              <th>NAME</th>
-              <td className="manageaccount__name">
-                <input type="text" name="name" value={user.name} />
-              </td>
-            </tr>
-            <tr>
-              <th>EMAIL</th>
-              <td className="manageaccount__email">
-                <input type="text" name="name" value={user.email} />
-              </td>
-            </tr>
-          </table>
+          <div>
+            <div className="manageaccount__label">NAME</div>
+            <div className="manageaccount__value">{user.name}</div>
+          </div>
+          <div>
+            <div className="manageaccount__label">EMAIL</div>
+            <div className="manageaccount__value">{user.email}</div>
+          </div>
         </div>
         <div className="manageaccount__buttons">
           <EditUsername oldUsername={user.name} />

@@ -54,6 +54,22 @@
   width: 90%;
 }
 
+.signin__fotgotpassword {
+  width: 100%;
+  font-size: 0.8em;
+  text-align: right;
+  margin-top: -5%;
+}
+
+.signin__fotgotpassword > span {
+  color: black;
+  cursor: pointer;
+}
+
+.signin__fotgotpassword > span:hover {
+  color: blue;
+}
+
 .signin__continue {
   width: 100%;
 }
