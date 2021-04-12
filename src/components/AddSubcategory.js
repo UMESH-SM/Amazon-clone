@@ -139,7 +139,9 @@ export default function AddSubcategory({
               <label>Enter Subcategory name</label>
               <input
                 type="text"
-                onChange={(e) => setNewSubcategory(e.target.value)}
+                onChange={(e) =>
+                  setNewSubcategory(e.target.value.toLowerCase())
+                }
                 minLength="4"
                 required
               />

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import "./Delivery.css";
 import Address from "./Address";
 import NewAddress from "./NewAddress";
@@ -6,6 +6,7 @@ import EditAddress from "./EditAddress";
 import DeliveryStepper from "./DeliveryStepper";
 import { AddressContext } from "../contexts/AddressContext";
 import SnackBar from "./SnackBar";
+import { useHistory } from "react-router-dom";
 
 function Delivery() {
   const [edit, setEdit] = useState(false);
@@ -16,6 +17,15 @@ function Delivery() {
     msg: "",
     type: "",
   });
+
+  const history = useHistory();
+  useEffect(() => {
+    return () => {
+      if (history.action === "POP") {
+        history.push("/cart");
+      }
+    };
+  }, []);
 
   const handleEdit = (id) => {
     setEditId(id);

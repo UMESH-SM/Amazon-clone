@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Payment.css";
 import DeliveryStepper from "./DeliveryStepper";
 import { CardsContext } from "../contexts/CardsContext";
 import { CartContext } from "../contexts/CartContext";
 import Card from "./Card";
 import { Button } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import SnackBar from "./SnackBar";
 
 function Payment() {
@@ -22,6 +22,15 @@ function Payment() {
     msg: "",
     type: "",
   });
+
+  const history = useHistory();
+  useEffect(() => {
+    return () => {
+      if (history.action === "POP") {
+        history.push("/delivery");
+      }
+    };
+  }, []);
 
   let currentMonth = String(new Date().getMonth() + 1);
   if (currentMonth.length !== 2) {

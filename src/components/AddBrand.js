@@ -136,7 +136,7 @@ export default function AddBrand({ oldCategories, handleAddBrand }) {
               <label>Enter Brand name</label>
               <input
                 type="text"
-                onChange={(e) => setNewBrand(e.target.value)}
+                onChange={(e) => setNewBrand(e.target.value.toLowerCase())}
                 minLength="2"
                 required
               />

@@ -81,6 +81,14 @@ export default function EditProduct({
           error
         );
       });
+
+    categories &&
+      categories.categories.forEach((item) => {
+        if (item.category === category) {
+          setSubcategoriesList(item.subcategoriesList);
+          setBrandsList(item.brandsList);
+        }
+      });
   }, []);
 
   useEffect(() => {

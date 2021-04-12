@@ -100,13 +100,13 @@ export default function AddCategory({ oldCategories, handleAddCategory }) {
           </AppBar>
           <div className="addcategory">
             <div className="addcategory__inputFields">
-              <label>Enter Category name</label>
+              <label>Enter Category name </label>
               <input
                 type="text"
                 minLength="4"
                 autoFocus
                 required
-                onChange={(e) => setNewCategory(e.target.value)}
+                onChange={(e) => setNewCategory(e.target.value.toLowerCase())}
               />
             </div>
             <div className="addcategory__inputFields">
@@ -115,14 +115,16 @@ export default function AddCategory({ oldCategories, handleAddCategory }) {
               </label>
               <input
                 type="text"
-                onChange={(e) => setNewSubcategories(e.target.value)}
+                onChange={(e) =>
+                  setNewSubcategories(e.target.value.toLowerCase())
+                }
               />
             </div>
             <div className="addcategory__inputFields">
               <label>Enter Brand names seperated by commas (Optional)</label>
               <input
                 type="text"
-                onChange={(e) => setNewBrands(e.target.value)}
+                onChange={(e) => setNewBrands(e.target.value.toLowerCase())}
               />
             </div>
           </div>

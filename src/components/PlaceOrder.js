@@ -1,12 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./PlaceOrder.css";
 import DeliveryStepper from "./DeliveryStepper";
 import OrderSummary from "./OrderSummary";
 import { CartContext } from "../contexts/CartContext";
 import ReviewProduct from "./ReviewProduct";
+import { useHistory } from "react-router";
 
 function PlaceOrder() {
   const [cart, setCart] = useContext(CartContext);
+
+  const history = useHistory();
+  useEffect(() => {
+    return () => {
+      if (history.action === "POP") {
+        history.push("/payment");
+      }
+    };
+  }, []);
 
   const monthNames = [
     "Jan",
