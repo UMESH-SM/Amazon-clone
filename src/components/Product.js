@@ -9,6 +9,8 @@ import { Redirect } from "react-router-dom";
 import EditProduct from "./EditProduct";
 import ProductDescription from "./ProductDescription";
 
+require("dotenv").config();
+
 function Product({
   item,
   handleEditProduct,

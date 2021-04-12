@@ -1,12 +1,15 @@
 import firebase from "firebase";
 
+require("dotenv").config();
+
 var firebaseConfig = {
-  apiKey: "AIzaSyD9QzgaNpdhSC7XuE8vtYzFwUMB328s-Fo",
-  authDomain: "umeshsm-amzn-clone.firebaseapp.com",
-  projectId: "umeshsm-amzn-clone",
-  storageBucket: "umeshsm-amzn-clone.appspot.com",
-  messagingSenderId: "766916624831",
-  appId: "1:766916624831:web:b329b9938666bce954210a",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
+
 export const fire = firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
